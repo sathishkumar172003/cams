@@ -1,0 +1,29 @@
+li{
+    width:120px;
+    text-align: center;
+}
+
+.main-heading{
+    font-family: 'Geologica', sans-serif;
+    font-size: 3.3rem;
+    margin-left:25px;
+}
+
+.main-nav a{
+ color:black;
+ text-decoration: none;   
+}
+
+
+.footer-list{
+    text-align:left;
+}
+
+.footer-list a{
+    color:black;
+    text-decoration: none;
+}
+
+
+
+

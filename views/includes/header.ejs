@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- bootstrap css -->
+    <link rel="stylesheet" href="/css/bootstrap-css.css">
+    <!-- custom css -->
+    <link rel="stylesheet" href="/css/main.css">
+      <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Geologica:wght@300&family=Lexend&display=swap" rel="stylesheet">
+    <!-- font awesom -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.min.js" integrity="sha512-3dZ9wIrMMij8rOH7X3kLfXAzwtcHpuYpEgQg1OA4QAob1e81H8ntUQmQm3pBudqIoySO5j0tHN4ENzA6+n2r4w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    
+    <!-- background-image: url('../images/The_Oxford.png'); -->
+    <nav style=" background-color: antiquewhite;">
+
+    <div  class="main" >
+        <img src = "../images/Oxford_logo.jpeg"alt="tocs logo" width="180px;" height="150px;" style="margin:10px 30px">
+        <h1 style="position:absolute; left:200px; top:50px;" class="main-heading"> The oxford College of Science </h1>
+        <address style="position:absolute; top:120px; left:370px;">No.32, 17th B Main, Sector IV, HSR Layout
+            Bengaluru 560 102</address>
+    
+    
+    <div style=" position: absolute; left:920px; top:130px " >
+        <nav class="main-nav">
+            <ul style="list-style: none; display: flex; position:absolute;"  >
+                <li><h5 style="position:absolute;left:80px;"><a href="/">HOME</a></h3></li>
+                <li><h5><a href="/about">ABOUT US</a></h3></li>
+                <li><h5><a href="/admission">ADMISSION</a></h3></li>
+                <li><h5 ><a href="/users/sign">SIGN IN</a></h3></li>
+                <li><h5 ><a href="">NOTICE</a></h3></li> 
+                <li><h5 ><a href="">COURSES</a></h3></li>
+
+                <% if(isLoggedIn) { %> 
+                        <li><h5> UserName</h5></li>
+                <% } %> 
+              
+
+                    
+            </ul>
+        </nav>
+    </div>
+</div>
+</nav>

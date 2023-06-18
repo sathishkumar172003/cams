@@ -1,0 +1,55 @@
+<%- include('../includes/header') -%> 
+
+
+<div class="container">
+    <div class="card mt-4" style=" width:600px; position: relative; left:350px">
+        <div class="card-body mt-4">
+            <img src="../images/profile.jpeg" alt="users profile" style=" border-radius: 50%; vertical-align: middle;
+            width: 180px;
+            height: 180px;
+            margin-left:180px;
+            ">
+            <h3 class="text-center mt-3">Welcome <%= user.email  %>  </h1>
+          
+
+           <hr style="border: 3px solid black;">
+          
+
+        </div>
+        <div class="card-body mt-3">
+            <div class="row mb-3">
+                <div class="card">
+                    <div class="col">
+                        <h4>Applications submitted</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="card">
+                    <div class="col">
+                        <h4>payment pending</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-3">
+                <div class="card">
+                    <div class="col">
+                        <h4>important notifcations</h4>
+                    </div>
+                </div>
+            </div>
+         
+            
+        </div>
+        <div class="card-footer mt-5">
+            <button class="btn btn-lg btn-primary" style="width:50%;">Logout</button>
+            <button class="btn btn-lg btn-success" style="width:50%;position: absolute; box-sizing: border-box;">Update</button>
+        </div>
+       
+    </div>
+</div>
+
+
+<%- include('../includes/footer') -%>
