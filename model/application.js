@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize')
 
 const sequelize = require('../util/database')
-const { application } = require('express')
+
+
 
 const Application = sequelize.define('applications', {
     id: {
@@ -76,6 +77,14 @@ const Application = sequelize.define('applications', {
         type:Sequelize.DataTypes.DATEONLY,
         allowNull: false,
     }, 
+    age : {
+        type: Sequelize.DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+            min: 16
+        }
+    },
+
     nationality : {
         type:Sequelize.DataTypes.STRING,
         defaultValue: 'India',
@@ -126,6 +135,10 @@ const Application = sequelize.define('applications', {
         type:Sequelize.DataTypes.STRING,
         allowNull: true,
         defaultValue: 'pending'
+    },
+    payment: {
+        type: Sequelize.DataTypes.BOOLEAN,
+        defaultValue: false
     }
 })
 

@@ -9,9 +9,26 @@ const User = sequelize.define('students', {
         allowNull : false,
         primaryKey: true
     }, 
-    username: Sequelize.DataTypes.STRING,
-    email : Sequelize.DataTypes.STRING,
-    password: Sequelize.DataTypes.STRING, 
+    username:{
+        type:  Sequelize.DataTypes.STRING,
+        allowNull: false,
+        validate: {
+            notNull : {
+                msg: 'name cant be null'
+            }
+        }
+    },
+    email : {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        isEmail: true, 
+        
+    },
+    password: {
+        type: Sequelize.DataTypes.STRING,
+        allowNull: false,
+    }, 
     profile: {
         type:Sequelize.DataTypes.TEXT,
         allowNull:false
@@ -19,6 +36,7 @@ const User = sequelize.define('students', {
 }, {
     timestamps: false
 })
+
 
 
 module.exports = User;

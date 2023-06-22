@@ -24,6 +24,11 @@ li{
     text-decoration: none;
 }
 
+.application-table tr{
+    height: 50px;
+    font-size: 25px;;
+}
+
 
 
 

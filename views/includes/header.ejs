@@ -36,12 +36,16 @@
                 <li><h5 style="position:absolute;left:80px;"><a href="/">HOME</a></h3></li>
                 <li><h5><a href="/about">ABOUT US</a></h3></li>
                 <li><h5><a href="/admission">ADMISSION</a></h3></li>
-                <li><h5 ><a href="/users/sign">SIGN IN</a></h3></li>
+                    <% if(!isLoggedIn){ %> 
+                        <li><h5 ><a href="/users/sign">SIGN IN</a></h3></li>
+                    <% } %> 
+               
                 <li><h5 ><a href="">NOTICE</a></h3></li> 
                 <li><h5 ><a href="">COURSES</a></h3></li>
 
                 <% if(isLoggedIn) { %> 
-                        <li><h5> UserName</h5></li>
+                        <li><h5> <a href="/users/userpage"> <%= current_user.username %> </a></h5></li>
+                        <li><h5> <a href="/users/logout">Logout</a></h5></li>
                 <% } %> 
               
 

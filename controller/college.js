@@ -1,23 +1,34 @@
 module.exports.homepage = (req, res)=>{
-    console.log(req.cookies['token name'])
-    res.render('home.ejs')
+    // console.log(req.cookies['token name']) //normal way of fetching the cookie 
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user
+    res.render('home.ejs', {isLoggedIn : isLoggedIn, current_user: current_user})
 }
 
-module.exports.about = (req, res)=>{    
-    res.render('about.ejs')
+module.exports.about = (req, res)=>{  
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user  
+    res.render('about.ejs', {isLoggedIn : isLoggedIn, current_user: current_user})
 }
 
 module.exports.admission =  (req, res)=>{
-    res.render('admission.ejs')
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user
+    res.render('admission.ejs', {isLoggedIn : isLoggedIn, current_user: req.session.current_user})
 }
 
 
 module.exports.getApplicationForm = (req, res) => {
-    res.render('application-form.ejs')
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user
+    res.render('application-form.ejs',{isLoggedIn : isLoggedIn, current_user: current_user})
+
 }
 
 
 module.exports.eligibility = (req, res) => {
-    res.render('eligibility.ejs')
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user
+    res.render('eligibility.ejs', {isLoggedIn : isLoggedIn, current_user: current_user})
 }
 
