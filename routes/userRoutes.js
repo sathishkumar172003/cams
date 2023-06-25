@@ -27,5 +27,7 @@ router.get('/logout',isAuth, authController.logout )
 
 router.get('/getApplications', isAuth, userController.getApplicationsRouter)
 
+
+
 module.exports = router
 

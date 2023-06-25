@@ -13,6 +13,8 @@ router.get('/about', collegeController.about)
 
 router.get('/admission',collegeController.admission)
 
+router.get('/courses', collegeController.courses)
+
 
 router.get('/applicationForm', isAuth, collegeController.getApplicationForm)
 

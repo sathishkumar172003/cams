@@ -1,7 +1,10 @@
 <%- include('../includes/header') -%>
 
 <div class="container">
-    <h4 class="text-danger mt-5 mb-4 text-center"> your aplication has been submitted  </h4>
+    <% if(!view) { %> 
+        <h4 class="text-danger mt-5 mb-4 text-center"> your aplication has been submitted  </h4>
+    <% } %> 
+   
 <div class="card p-5">
     <!-- <h4>Student Name: <%= current_user.username %> </h4>
     <h4>Date of Birth: <%= application.DOB %> </h4> -->

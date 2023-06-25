@@ -65,8 +65,14 @@ module.exports.postApplication = (req, res) => {
 module.exports.userPage = (req, res) => {
     let isLoggedIn = req.session.isLoggedIn
     let current_user = req.session.current_user
+    let message = req.flash('success')
+    if(message.length > 0){
+        message = message[0]
+    } else {
+        message =null;
+    }
 
-    res.render('users/welcome_page.ejs', {isLoggedIn: isLoggedIn, current_user: current_user})   
+    res.render('users/welcome_page.ejs', {isLoggedIn: isLoggedIn, current_user: current_user, message : message})   
 }
 
 
@@ -75,6 +81,20 @@ module.exports.getApplicationsRouter = (req, res) => {
     // let applications ;
 
     let current_user = req.session.current_user
+    let message = req.flash('appDeletedSuccess')
+    let updateMessage = req.flash('updateSuccess')
+    if (updateMessage.length > 0){
+        updateMessage = updateMessage[0]
+    }else {
+        updateMessage = null
+    }
+    if(message.length > 0){
+        message = message[0]
+    } else {
+        message = null;
+
+    }
+
     User.findOne({where : {
         id : current_user.id
     }})
@@ -82,7 +102,7 @@ module.exports.getApplicationsRouter = (req, res) => {
         return user.getApplications()
     })
     .then(applications => {
-        res.render('users/user_applications', {applications: applications, isLoggedIn: req.session.isLoggedIn, current_user : current_user})
+        res.render('users/user_applications', {applications: applications, isLoggedIn: req.session.isLoggedIn, current_user : current_user, message : message, updateMessage : updateMessage})
     })
     .catch(err => console.log(err))
 }

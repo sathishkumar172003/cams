@@ -1,11 +1,15 @@
 //importing modules 
 const bcrypt  = require('bcryptjs')
 
+const client = require('../util/mailTransporter')
+
+
 
 
 //importing models
 const User = require('../model/user')
 const Application = require('../model/application')
+const { json } = require('body-parser')
 
 
 
@@ -14,7 +18,14 @@ module.exports.signup= (req, res)=>{
     if(isLoggedIn) {
         res.redirect('/')
     }
-    res.render('users/sign.ejs', {isLoggedIn: isLoggedIn})
+    let message = req.flash('info')
+    if(message.length > 0){
+        message = message[0]
+    }
+    else {
+        message = null;
+    }
+    res.render('users/sign.ejs', {isLoggedIn: isLoggedIn, message: message})
 }
 
 
@@ -28,26 +39,57 @@ module.exports.postSign = (req, res) =>{
         email : email
     }})
     .then((user) => {
+
+        if(user) {
+            req.flash('info', 'email already taken')
+            req.session.save((err) => {
+                return res.redirect("sign")
+            })
+           
+        }
         //if the user doesn't exist create one
         if (!user){
-            let hashedPassword = bcrypt.hashSync(password, 12)
-            return new_user = User.create({
-                username: username,
-                email : email,
-                password: hashedPassword,
-                profile: studentPic
-            })
+        
+            return  bcrypt.hash(password, 12)
+          
         }
-        // if the user exists just redirect to home
-        res.redirect('/')
+         
+    })
+    .then((hashedPassword) =>{
+        const new_user = User.build({
+            username: username,
+            email : email,
+            password: hashedPassword,
+            profile: studentPic
+        })
+        return new_user.save()
     })
     .then((user) => {
-        req.session.isLoggedIn = true
-        req.session.current_user = user
-        res.render('users/welcome_page',{current_user : req.session.current_user, isLoggedIn : req.session.isLoggedIn})
+        if(user){
+            req.session.isLoggedIn = true
+            req.session.current_user = user
 
-    })    
+            const sender = {
+                email: "sthshkmr172003@gmail.com",
+                name: " Sathish Kumar Node js Developer",
+              };
+              const recipients = [
+                {
+                  email: "sthshkmr172003@gmail.com",
+                }
+              ];
+              
+              
+           
+            req.flash('success', 'your account has been succesfully created!! ')
+            req.session.save((err)=>{
+                return res.redirect('userpage')
+            })
+        }
+    })   
+    .catch(err => console.log(err)) 
 }
+
 
 
 module.exports.login = (req, res) =>{
@@ -55,9 +97,18 @@ module.exports.login = (req, res) =>{
     if(isLoggedIn) {
         res.redirect('/')
     }
+    let message = req.flash('error')
+    if(message.length > 0){
+        message = message[0]
+    } else {
+        message = null;
+    }
+    res.render('users/login', {isLoggedIn : isLoggedIn, message: message})
+ 
+            
+} 
 
-    res.render('users/login.ejs', {isLoggedIn : isLoggedIn})
-}
+    
 
 
 module.exports.postLogin = (req, res) => {
@@ -77,33 +128,29 @@ module.exports.postLogin = (req, res) => {
             // using express-session to send the session cookie 
             req.session.isLoggedIn = true
             req.session.current_user = user
-            // using cookie-parse to send the cookie 
-            // res.cookie('token name', 'SathishKumar@17', {
-            //     maxAge:5000, // it takes time in seconds after the specified time the cookie will be expired.
-            //     HTTPonly:true, // makes the cookies in-accessible using javascript # we can access the cookies using document.cookie (js)
-            //     secure: true, // rejects the if its not happening in https or in other words, it accepts the cookies only if it comes from https requst
-            //     sameSite: 'lax', // prevents third parties from accessing cookies that belongs to our website 
-            //     expires: new Date('17 06 2023'), // cookie will be expired when the specified date comes
-            // })
-            // res.setHeader('set-Cookie', 'isLoggedIn=true')  // normal way of sending cookie to browser withour 3rd party packages 
+         // res.setHeader('set-Cookie' 'isLoggedIn=true')  // normal way of sending cookie to browser withour 3rd party packages 
             let isLoggedIn = req.session.isLoggedIn
             let current_user = req.session.current_user
-            
-            // saving cookies in browser may take some seconds, so if we render page before saving it may throw error 
-            // so if we want to continue some operation only after saving session we call use save() method that takes 
-            // functions as its arguments that will be executed after session gets saved
+            req.flash('success', 'you have succesfully logged in! ')
             req.session.save((err) => {
-                res.render('users/welcome_page', {user: user, isLoggedIn : isLoggedIn, current_user: current_user})
     
+                res.redirect('userpage')
             })
             }
             else {
-                res.send('<h1> Your password is incorrect </h1> ')
+                req.flash('error', 'invalid password')
+                req.session.save((err)=>{
+                    res.redirect('login')
+                })
+                
             }
 
         }
         else {
-            res.redirect('/users/login')
+            req.flash('error', 'invalid email')
+            req.session.save((err)=>{
+                res.redirect('login')
+            })
         }
 
         
@@ -128,5 +175,7 @@ module.exports.logout = (req, res) => {
     })
   
 }
+
+
 
 

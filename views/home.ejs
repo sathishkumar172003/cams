@@ -19,9 +19,9 @@
 
     <div class="container mt-5" >
         <h1 style="margin-top:80px;">Latest Notice </h1>
-        <div class="card mt-5" style="width:500px;">
+        <div class="card mt-5" style="width:500px; background-color:rgb(211, 229, 139);">
             <div class="card-header bg-success">
-                <h4>Admission open</h1>
+                <h4 class="text-white mt-2" style="position: relative; left:130px;">Admission open</h1>
             </div>
             <div class="card-body">
               <h5 class="card-title">Admission open for the year 2023</h5>
@@ -66,11 +66,16 @@
             </div>
           </div>
         
+    
+
+    <div class="mt-5" >
+        <!-- for printing the salient features in boxes cards -->
+        
+        <%- include('salient-features.ejs') %> 
+
     </div>
 
-    <div>
-        <!-- for printing the salient features in boxes cards -->
-    </div>
+</div>  
 
 <%- include('./includes/footer.ejs') %> 
 

@@ -32,3 +32,7 @@ module.exports.eligibility = (req, res) => {
     res.render('eligibility.ejs', {isLoggedIn : isLoggedIn, current_user: current_user})
 }
 
+
+module.exports.courses = (req,res) => {
+    res.render('courses.ejs', {isLoggedIn: req.session.isLoggedIn, current_user : req.session.current_user} )
+}

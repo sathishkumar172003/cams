@@ -1,41 +1,70 @@
 <%- include('../includes/header') %> 
 
 <div class="container">
+    <% if(updateMessage) { %>
+        <div class='alert alert-warning text-center'>
+            <%= updateMessage %> 
+        </div>
+    <% } %>
+    
+    <% if(message) { %>
+        <div class='alert alert-warning text-center'>
+            <%= message %> 
+        </div>
+    <% } %>
+
     <% if(applications.length == 0) { %> 
-        <div style="height:480px;">
+        <div style="height:220px;">
             <h1 class="text-danger mt-5">You have not submitted any applications </h1>
             <button class="btn btn-success"><a href="/applicationForm">Apply Now </a></button>
 
         </div>
+
+       
        
        
     <% } else { %> 
 
-
- 
-        <% applications.forEach(application => { %> 
+        <div class="row">
+            <% applications.forEach(application => { %> 
+            <div class="col">
+               
     
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title"> <%= application.course %> </h3>
+                    <div class="card mt-5" style="width:500px; background-color: aquamarine;">
+                        <div class="card-header">
+                            <h3 class="card-title text-center"> Course:  <%= application.course %> </h3>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text"> Status:  <%= application.formStatus %> </p>
+                            <% if(application.payment == false){ %> 
+                                <p class="card-text"> You can pay the fee once your application  gets accepted  </p>
+                            <% } else { %> 
+                                <p class="card-text"> Paid </p>
+                            <% } %>  
+        
+                        </div>
+                        <div class="card-header">
+                            <button class="btn btn-danger" type="button"> <a href="/applications/<%= application.id %> ">Delete</a> </button>
+                            <button class="btn btn-info"type="button"> <a href="/applications/updateApplication/<%= application.id %> ">Update</a> </button>
+                            <button class="btn btn-success" type="button"> <a href="/applications/viewApplication/<%= application.id %> ">View Application</a> </button>
+                        </div>
+                    </div>
+        
                 </div>
-                <div class="card-body">
-                    <p class="card-text"> <%= application.formStatus %> </p>
-                    <% if(application.payment == false){ %> 
-                        <p class="card-text"> Not paid </p>
-                    <% } else { %> 
-                        <p class="card-text"> Paid </p>
-                    <% } %>  
-                </div>
-            </div>
+                <% }) %> 
+        
+        
+        </div>
 
-
-        <% }) %> 
-
+        
+ 
+       
     <% }%> 
    
 </div>
 
+<div style="position: relative; top:280px;">
+    <%- include('../includes/footer') %> 
+</div>
 
 
-<%- include('../includes/footer') %> 

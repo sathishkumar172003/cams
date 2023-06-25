@@ -29,6 +29,20 @@ li{
     font-size: 25px;;
 }
 
+.courses-list li {
+    width:300px;
+    margin-top:20px;
+}
+
+.eligibility-list li{
+    text-align: left;
+    padding: 0px;
+}
+
+.eligibility-title {
+    margin-bottom: 30px;
+}
+
 
 
 

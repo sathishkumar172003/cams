@@ -140,6 +140,8 @@ const Application = sequelize.define('applications', {
         type: Sequelize.DataTypes.BOOLEAN,
         defaultValue: false
     }
+}, {
+    timestamps: false,
 })
 
 
