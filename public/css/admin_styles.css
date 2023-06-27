@@ -1,0 +1,25 @@
+.admin_main a {
+    text-decoration: none;
+    color : white;
+}
+
+.application-info h5, .course-info h5 , .notice-info h5{
+    margin-top:20px;
+}
+
+
+.application-info_header {
+    background-color:rgb(22, 71, 55); 
+}
+
+.application-info_body {
+    background-color: rgb(9, 44, 32);
+}
+
+.application-info, .course-info, .notice-info {
+    margin-top:100px;
+}
+
+
+
+

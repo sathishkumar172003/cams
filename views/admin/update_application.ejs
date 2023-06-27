@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/bootstrap-css.css">
+</head>
+<body>
+    
+
+
+<div class="container">
+    <h1 class="mb-5 mt-5">Application form </h1>
+    <form action="/applications/updateApplication/<%= application.id %> " method="POST">
+
+
+    <div class="row">
+        <div class="col">
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title ">Personal information </h3>
+                </div>
+            </div>
+        <!-- course applied -->
+            <div class="card">
+                <div class="card-body">
+                <label class="form-label" >Course </label>
+                        <select name="course"id='course' class="form-select" >
+                            <optgroup label="B.Sc">
+
+                                <% if(application.course == 'biotechnology') { %>
+                                    <option value="biotechnology" selected>Bio technology</option>
+                                <% }else { %> 
+                                    <option value="biotechnology" >Bio technology</option>
+                               <%  } %> 
+                                
+                               <%  if(application.course == 'biochemistry') { %> 
+                                    <option value="biochemistry" selected >Bio Chemistry</option>
+                                <% }else { %>
+                                    <option value="biochemistry" >Bio Chemistry</option>
+                                <% } %>
+                                
+                                <% if(application.course == 'genetics') { %> 
+                                    <option value="genetics" selected >Genetics</option>
+                               <%  }else { %>
+                                    <option value="genetics" >Genetics</option>
+                                <% } %> 
+                                
+                               <%  if(application.course == 'microbiology') { %> 
+                                    <option value="microbiology" selected >Microbiology</option>
+                               <%  } else { %>
+                                    <option value="microbiology" >Microbiology</option>
+                               <% } %>
+                                
+                                <% if(application.course == 'physics'){ %> 
+                                    <option value="physics" selected>Physics</option>
+                                <% }else { %> 
+                                    <option value="physics" >Physics</option>
+                                <% } %> 
+                               
+                               <% if(application.course == 'computer science'){ %> 
+                                <option value="computer science" selected >Computer Science</option>
+                              <%  }else { %> 
+                                <option value="computer science" >Computer Science</option>
+                               <% } %> 
+
+
+                              <%  if(application.course == 'electronics') { %> 
+                                <option value="electronics" selected>Electronics</option>
+                              <%  } else { %> 
+                                <option value="electronics" >Electronics</option>
+                                <% } %> 
+                                
+                           <%  if(application.course == 'mathematics'){ %> 
+                                <option value="mathematics" >Mathematics</option>
+                            <% }else { %>  
+                                <option value="mathematics" >Mathematics</option>
+                           <%  } %> 
+                               
+                            </optgroup>
+                            <optgroup label="BCA">
+                               <%  if(application.course == 'computer application') { %> 
+                                    <option value="computer application" selected>Computer Application</option>
+                               <%  }else { %> 
+                                    <option value="computer application">Computer Application</option>
+                               <%  } %> 
+                                
+                        
+                            </optgroup>
+                        </select>
+
+                </div>
+            </div>
+
+        <!-- course applied -->
+
+        <!-- student pic -->
+        <div class="card">
+            <div class="card-body">
+                <label  class="form-label">Student Pic</label>
+                <img src="<%= application.profile %>  " alt="student profile">
+            </div>
+        </div>
+        <!-- student pic  -->
+
+        <!-- father name -->
+        <div class="card">
+            <div class="card-body">
+                <label class="form-label">Father's Name</label>
+                <input type="text" name="fatherName"  class="form-control" value="<%= application.fatherName %> ">
+            </div>
+        </div>
+         <!-- father name -->
+
+         <!-- mother name -->
+         <div class="card">
+            <div class="card-body">
+                <label  class="form-label">Mother's Name</label>
+                <input type="text" name="motherName"  class="form-control" value="<%= application.motherName %> ">
+            </div>
+         </div>
+        <!-- mother name -->
+
+        <!-- DOB -->
+
+
+        <div class="card">
+            <div class="row">
+                <div class="col">
+                    <div class="card-body">
+                        <label  class="form-label">Date of Birth</label>
+                        <input type="text" value="<%= application.DOB %> ">
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="card-body">
+                        <label  class="form-label mb-3" style="display:block; ">Gender</label>
+                        <% if(application.gender == 'male') { %>
+                            <input type="radio" name="gender" value="male" checked> Male
+                        <% } else { %> 
+                            <input type="radio" name="gender" value="male"> Male
+                       <%  } %> 
+
+
+                        <% if(application.gender == 'female') { %>
+                            <input type="radio" name="gender" value="female" checked> Female
+                      <%   } else { %> 
+                            <input type="radio" name="gender" value="female"> Female
+                      <%   } %> 
+
+
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+
+        <!-- DOB -->
+
+        <!-- Nationality -->
+
+        <div class="card">
+            <div class="card-body">
+                <label  class="form-label">Nationality</label>
+                <input type="text" name="nationality"  class="form-control" value="<%= application.nationality %> ">
+            </div>
+        </div>
+
+        <!-- Nationality -->
+
+
+        <!-- Address -->
+
+        <div class="card">
+            <div class="card-body">
+                <label class="form-label"> Enter your correspondance address </label>
+                <textarea name="correspondanceAddress"  cols="20" rows="05" class="form-control " >
+                    <%= application.address %>
+                </textarea>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <label  class="form-label">Permanent Address </label>
+                <textarea name="permanentAddress"  cols="30" rows="05" class="form-control">
+                        <%= application.address %> 
+                </textarea>
+            </div>
+        </div>
+
+        <!-- address   -->
+
+        <!-- category -->
+
+        <div class="card">
+            <div class="card-body">
+                <label class="form-label">Select Category</label>
+                <select name="category" id="category"  class="form-select">
+
+                   
+
+
+
+                    <% if(application.category == 'general'){ %> 
+                        <option value="general" selected>General</option>
+                        <% } else { %>
+                            <option value="general">General</option>
+                        <% } %> 
+
+
+                    <% if(application.category == 'obc'){ %> 
+                        <option value="obc" selected>OBC</option>
+                    <% } else { %>
+                        <option value="obc">OBC</option>
+                    <% } %> 
+                    
+                
+                    <% if(application.category == 'sc/st'){ %> 
+                        <option value="sc/st" selected>SC/ST</option>
+                        <% } else { %>
+                            <option value="sc/st">SC/ST</option>
+                        <% } %> 
+                  
+                        <% if(application.category == 'general'){ %> 
+                            <option value="others" selected>OTHERS</option>
+                            <% } else { %>
+                                <option value="others">OTHERS</option>
+                            <% } %> 
+                 
+                    
+                </select>
+            </div>
+        </div>
+
+
+
+        <!-- category -->
+
+
+
+        </div>
+        <div class="col">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Education </h3>
+                </div>
+            </div>
+            <!-- sslc information -->
+            <div class="card">
+                <div class="card-body">
+                    <h4>SSLC</h4>
+                    <div class="row">
+                        <div class="col">
+                            <label class="form-label">Year of Passing: </label>
+                            <input type="text" name="sslcYearOfPassing" class="form-control" value="<%= application.yearOfPassing10 %> ">
+                        </div>
+                        <div class="col">
+
+                            <label  class="form-label"> Board/University</label>
+                            <input type="text" name="sslcBoard"  class="form-control" value="<%= application.board10 %> ">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label  class="form-label"> Percentage </label>
+                            <input type="text" name="sslcPercentage" class="form-control" value="<%= application.percentage10 %> ">
+
+                        </div>
+                        <div class="col">
+                            <label  class="form-label"> Stream </label>
+                            <input type="text" name="sslcStream"  class="form-control" value="<%= application.stream10 %> ">
+
+                        </div>
+                    </div>
+                  
+
+
+                </div>
+            </div>
+            <!-- sslc information -->
+
+            <!-- puc information -->
+
+            <div class="card">
+                <div class="card-body">
+                    <h4>12<sup>th</sup>(Senior secondary)</h4>
+                    <div class="row">
+                        <div class="col">
+                            <label  class="form-label"> Board/University</label>
+                            <input type="text" name="pucBoard"  class="form-control" value="<%= application.board12 %> ">
+                        </div>
+                        <div class="col">
+                            <label  class="form-label"> Year of Passing </label>
+                            <input type="text" name="pucYearOfPassing" class="form-control" value="<%= application.yearOfPassing12 %> ">
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label  class="form-label"> Percentage </label>
+                            <input type="text" name="pucPercentage"  class="form-control" value="<%= application.percentage12 %> ">
+                        </div>
+                        <div class="col">
+                            <label  class="form-label">Stream</label>
+                            <input type="text" name="pucStream"  class="form-control" value="<%= application.stream12 %> ">                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!-- puc information -->
+
+
+
+     
+            <h1>form status</h1>
+            <input type="text" name="status" value="<%= application.formStatus %> ">
+
+            <!-- // start coding from here to display the list of options accepted, pending , rejected and allow the admin to select 
+            so basically created a select option with 3 options (accepted, rejected, pending) -->
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-lg btn-primary mt-5" >Submit Application </button>
+</form>
+</div>
+

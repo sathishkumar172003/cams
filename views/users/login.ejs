@@ -2,6 +2,13 @@
 
 <div class="container">
     <div class="card" style="width:500px; margin-left:400px; margin-top:100px; margin-bottom:150px; padding:50px;;">
+
+        <% if(resetSuccess) { %>
+            <div class='alert alert-success text-center'>
+                <%= resetSuccess %> 
+            </div>
+        <% } %>
+
         <% if(message) { %>
             <div class='alert alert-danger text-center'>
                 <%= message %> 

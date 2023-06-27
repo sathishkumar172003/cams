@@ -103,3 +103,5 @@ module.exports.viewApplication = (req,res) => {
         res.render('users/application_submitted.ejs', {application:application,isLoggedIn : isLoggedIn, current_user: current_user, view : true})
     })
 }
+
+

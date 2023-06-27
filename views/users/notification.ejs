@@ -1,0 +1,33 @@
+<%- include('../includes/header') %> 
+
+
+<div class="container">
+
+    <h1 class="mt-5"> Notifications </h1>
+
+    <!-- when no applications are accepted so the user does not have any notifications  -->
+    <div class="row "  >
+        <% if(message){ %> 
+            <h4 class="mt-5 text-danger" >You have No notifications </h4>
+        <%  } else { %> 
+  
+  
+    <!-- when the user some applications which are accepted but fee for it has not paid, so we need to inform the user to pay the fee  -->
+    <% applications.forEach(application => { %>
+        <div class="card mt-5" style="background-color:rgb(169, 220, 201); height:50px; margin-bottom: 0;">
+            <h5> Your application for <%= application.course %> has been accepted so kindly pay the fee </h5>
+        </div>
+    <% }) %> 
+    </div>
+        <% } %>
+</div>
+
+
+
+<!-- from here goes the header  -->
+
+
+
+
+
+
