@@ -12,6 +12,7 @@ const Application = require('../model/application')
 
 
 
+// --------------------------------------sign in ----------------------------------//
 
 module.exports.signup= (req, res)=>{
     let isLoggedIn = req.session.isLoggedIn
@@ -25,7 +26,9 @@ module.exports.signup= (req, res)=>{
     else {
         message = null;
     }
-    res.render('users/sign.ejs', {isLoggedIn: isLoggedIn, message: message})
+    res.render('users/sign.ejs', {isLoggedIn: isLoggedIn, message: message,
+    oldInputs : {email : "", confirmPassword: "", password : "", username: ''},
+    validationError: [] })
 }
 
 
@@ -33,58 +36,49 @@ module.exports.postSign = (req, res) =>{
     let isLoggedIn = req.session.isLoggedIn
     username = req.body.username
     email = req.body.email
-    password = req.body.password
+    const confirmPassword = req.body.confirmPassword
+    hashedPassword = bcrypt.hashSync(req.body.password, 12) 
+   
     studentPic = req.body.studentPic
 
     const errors = validationResult(req)
     if(!errors.isEmpty()) {
         
-        return res.status(422).render('users/sign.ejs', {isLoggedIn: isLoggedIn, message: errors.array()[0].msg})
+        return res.status(422).render('users/sign.ejs', {isLoggedIn: isLoggedIn, message: errors.array()[0].msg,
+        oldInputs : {email : email, username : username, password : req.body.password, confirmPassword : confirmPassword},
+    validationError : errors.array()})
 
     }
 
-    User.findOne({where: {
-        email : email
-    }})
-    .then((user) => {
+    const new_user = User.create({
+        username: username,
+        email : email,
+        password: hashedPassword,
+        profile: studentPic
+    })
+    .then(user => {
+        console.log(user)
 
-        if(user) {
-            req.flash('info', 'email already taken')
-            req.session.save((err) => {
-                return res.redirect("sign")
-            }) 
-        }
-        //if the user doesn't exist create one
-        if (!user){
-        
-            return  bcrypt.hash(password, 12)
-          
-        }
-         
-    })
-    .then((hashedPassword) =>{
-        const new_user = User.build({
-            username: username,
-            email : email,
-            password: hashedPassword,
-            profile: studentPic
-        })
-        return new_user.save()
-    })
-    .then((user) => {
-        if(user){
-            req.session.isLoggedIn = true
-            req.session.current_user = user
+    req.session.isLoggedIn = true
+    req.session.current_user = user
+    
            
-            req.flash('success', 'your account has been succesfully created!! ')
-            req.session.save((err)=>{
-                return res.redirect('userpage')
+    req.flash('success', 'your account has been succesfully created!! ')
+    req.session.save((err)=>{
+        return res.redirect('userpage')
             })
-        }
-    })   
-    .catch(err => console.log(err)) 
-}
+    })
+    
 
+    
+
+}
+  
+
+
+
+
+                // ----------------------login------------------------------------// 
 
 
 module.exports.login = (req, res) =>{
@@ -107,7 +101,9 @@ module.exports.login = (req, res) =>{
     } else {
         message = null;
     }
-    res.render('users/login', {isLoggedIn : isLoggedIn, message: message, resetSuccess : resetSuccess})
+    res.render('users/login', {isLoggedIn : isLoggedIn, message: message, resetSuccess : resetSuccess,
+    oldInputs : {email : '', password: ''},
+validationError : []})
  
             
 } 
@@ -118,47 +114,36 @@ module.exports.login = (req, res) =>{
 module.exports.postLogin = (req, res) => {
     email = req.body.email
     password = req.body.password
+
+    let isLoggedIn = req.session.isLoggedIn;
+
     
+    
+
+    const errors = validationResult(req)
+    console.log(errors.array())
+    if(!errors.isEmpty()){
+        return res.status(422).render('users/login', {isLoggedIn : isLoggedIn, message: errors.array()[0].msg, resetSuccess : null,
+        oldInputs :{email : email  , password : password},
+    validationError : errors.array()
+})
+    }
+
+ 
+
 
     User.findOne({where:{
         email: email 
     }})
     .then(user => {
-        if(user){
-            console.log(user.username)
-            let isUser = bcrypt.compareSync(password, user.password)
-
-            if(isUser){
-            // using express-session to send the session cookie 
+      
             req.session.isLoggedIn = true
             req.session.current_user = user
          // res.setHeader('set-Cookie' 'isLoggedIn=true')  // normal way of sending cookie to browser withour 3rd party packages 
-            let isLoggedIn = req.session.isLoggedIn
-            let current_user = req.session.current_user
             req.flash('success', 'you have succesfully logged in! ')
             req.session.save((err) => {
-    
                 res.redirect('userpage')
-            })
-            }
-            else {
-                req.flash('error', 'invalid password')
-                req.session.save((err)=>{
-                    res.redirect('login')
-                })
-                
-            }
-
-        }
-        else {
-            req.flash('error', 'invalid email')
-            req.session.save((err)=>{
-                res.redirect('login')
-            })
-        }
-
-        
-     
+            })   
     })
     .catch(err => console.log('match not found'))
 }

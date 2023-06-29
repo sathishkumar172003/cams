@@ -16,7 +16,7 @@ router.get('/admission',collegeController.admission)
 router.get('/courses', collegeController.courses)
 
 
-router.get('/applicationForm', isAuth, collegeController.getApplicationForm)
+
 
 
 router.get('/eligibility', collegeController.eligibility)

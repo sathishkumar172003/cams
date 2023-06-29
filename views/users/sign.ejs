@@ -6,19 +6,26 @@
                     <%= message %> 
                 </div>
             <% } %>
-             <h1 class="card-title mb-5" style="margin-left:130px;">Sign in </h1>
-            <form action="/users/sign" method="POST" novalidate>
+             <h1 class="card-title mb-5" style="margin-left:130px;" >Sign in </h1>
+            <form action="/users/sign" method="POST" enctype="multipart/form-data" novalidate>
                 <label class="form-label">Enter your name</label>
-                <input type="text" name="username" id="" class="form-control mb-3">
+                <input type="text" name="username" id="" class="form-control mb-3" value="<%= oldInputs.username %> ">
     
                 <label  class="form-label">Enter your email</label>
-                <input type="email" name="email"  class="form-control mb-3">
+                <input type="email" name="email"  
+                    class="<%= validationError.find(e => e.path == 'email') ? 'form-control is-invalid mb-3' : 'form-control mb-3' %>" 
+                    value="<%= oldInputs.email %>">
     
-                <label  class="form-label">Enter your password</label>
-                <input type="password" name="password"  class="form-control mb-2">
+                    <label  class="form-label">Enter your password</label>
 
+                    <input type="password" name="password"  
+                    class="<%= validationError.find(e => e.path == 'password') ? 'form-control is-invalid mb-3' : 'form-control mb-3' %>"   value="<%= oldInputs.password %>">
+    
+
+                    
                 <label  class="form-label"> confirm password </label>
-                <input type="password" name="confirmPassword" class="form-control mb-2">
+                <input type="password" name="confirmPassword" 
+                class="<%= validationError.find(e => e.path == 'password') ? 'form-control is-invalid mb-3' : 'form-control mb-2'%>" value="<%= oldInputs.confirmPassword %>">
 
                 <label  class="form-label">Student Pic</label>
                 <input type="file" name="studentPic"  class="form-control"> <br> 

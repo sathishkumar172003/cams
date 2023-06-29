@@ -52,19 +52,13 @@ const Application = sequelize.define('applications', {
     percentage10 : {
         type:Sequelize.DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            min: 40,
-            max: 100
-        }
+   
     },
 
     percentage12: {
         type:Sequelize.DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            min: 40,
-            max: 100
-        }
+    
     },
     profile : {
         type:Sequelize.DataTypes.STRING, 
@@ -80,9 +74,7 @@ const Application = sequelize.define('applications', {
     age : {
         type: Sequelize.DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-            min: 16
-        }
+     
     },
 
     nationality : {

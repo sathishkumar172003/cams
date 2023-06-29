@@ -10,6 +10,10 @@ const bcrypt = require('bcryptjs')
 const path = require('path')
 const flash = require('connect-flash')
 const nodemailer = require("nodemailer");
+const multer = require('multer')
+const upload = multer({dest: 'public/uploaded-images'})
+
+
 
 // custom modules
 const userRoutes  = require('./routes/userRoutes')

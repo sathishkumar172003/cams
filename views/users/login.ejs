@@ -21,10 +21,18 @@
        
         <div class="card-body">
             <label  class="form-label">Enter your email </label>
-            <input type="text" name="email"  class="form-control mb-3">
+            <input 
+            type="text" 
+            name="email"  
+            class="<%= validationError.find(e => e.path == 'email') ? 'form-control mb-3 is-invalid' : 'form-control mb-3'%> " 
+            value="<%= oldInputs.email %>">
 
             <label  class="form-label">Enter your password</label>
-            <input type="text" name="password"  class="form-control mb-3">
+            <input 
+            type="text" 
+            name="password"  
+            class="<%= validationError.find(e => e.path == 'password') ? 'form-control mb-3 is-invalid' : 'form-control mb-3'%>"
+            value="<%= oldInputs.password %>">
 
             <p class="text-muted">Don't have an account? <a href="/users/sign">Sign in</a></p>
             <p class="text-muted">Forgot Password ? <a href="/users/resetpassword">Reset password</a></p>

@@ -18,12 +18,7 @@ module.exports.admission =  (req, res)=>{
 }
 
 
-module.exports.getApplicationForm = (req, res) => {
-    let isLoggedIn = req.session.isLoggedIn
-    let current_user = req.session.current_user
-    res.render('application-form.ejs',{isLoggedIn : isLoggedIn, current_user: current_user})
 
-}
 
 
 module.exports.eligibility = (req, res) => {

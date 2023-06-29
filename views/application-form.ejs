@@ -1,13 +1,18 @@
 <%- include('./includes/header') %> 
 
 <div class="container">
-    <h1 class="mb-5 mt-5">Application form </h1>
-    <form action="/users/postApplication" method="POST">
-
-
+    
+ 
+    <% if(errorMessage) { %>
+        <div class='alert alert-success text-center mt-5'>
+            <%= errorMessage %> 
+        </div>
+    <% } %>
+    
+    <h1 class="mb-5 mt-5"> Application form </h1>
+    <form action="/applications/postApplication" method="POST">
     <div class="row">
         <div class="col">
-
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title ">Personal information </h3>
@@ -30,15 +35,11 @@
                             </optgroup>
                             <optgroup label="BCA">
                                 <option value="computer application">Computer Application</option>
-                        
                             </optgroup>
                         </select>
-
                 </div>
             </div>
-
         <!-- course applied -->
-
         <!-- student pic -->
         <div class="card">
             <div class="card-body">
@@ -47,7 +48,6 @@
             </div>
         </div>
         <!-- student pic  -->
-
         <!-- father name -->
         <div class="card">
             <div class="card-body">
@@ -56,7 +56,6 @@
             </div>
         </div>
          <!-- father name -->
-
          <!-- mother name -->
          <div class="card">
             <div class="card-body">
@@ -65,10 +64,7 @@
             </div>
          </div>
         <!-- mother name -->
-
         <!-- DOB -->
-
-
         <div class="card">
             <div class="row">
                 <div class="col">
@@ -87,7 +83,6 @@
             </div>
         
         </div>
-
         <!-- DOB -->
 
         <!-- Nationality -->
