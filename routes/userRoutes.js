@@ -2,7 +2,15 @@ const express = require('express')
 const router = express.Router()
 const { check , body} = require('express-validator')
 
+
 const bcrypt = require('bcryptjs')
+
+// const multer = require('multer')
+// const upload_mutter = require('../util/upload-middleware')
+// const upload = multer({storage: upload_mutter.files.storage()})
+
+const upload = require('../util/upload')
+
 
 const userController = require('../controller/user')
 const authController = require('../controller/auth')
@@ -15,7 +23,7 @@ const isAuth = require('../middlewares/is_auth')
 router.get('/sign', authController.signup)
 
 
-router.post('/sign', [check('email').isEmail().withMessage('Please enter a valid email ').normalizeEmail().
+router.post('/sign',   upload.single('studentPic') ,[ body('email').isEmail().withMessage('Please enter a valid email ').
                     custom(async (value, {req}) => {
                         await User.findOne({where: {email : value}})
                         .then(user =>{
@@ -33,7 +41,8 @@ router.post('/sign', [check('email').isEmail().withMessage('Please enter a valid
                             throw new Error('Password didn\'t match ')
                         }
                      }), ]
-,                    authController.postSign)
+                                             
+                     ,authController.postSign)
 
 
 router.get('/login',authController.login)

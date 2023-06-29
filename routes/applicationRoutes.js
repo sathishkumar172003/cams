@@ -1,16 +1,29 @@
 const express = require('express')
 const {check, body} = require('express-validator')
 
+// const multer = require('multer')
+// const upload_mutter = require('../util/upload-middleware')
+// const upload = multer({storage: upload_mutter.files.storage()})
+
+const upload = require('../util/upload')
+
+
 const router = express.Router()
 
 const appController = require("../controller/application")
 const isAuth = require('../middlewares/is_auth')
 
 
+
+// const cpUpload = upload.fields([{ name: 'studentPic', maxCount: 1 }, { name: 'tc', maxCount: 8 }, {name: 'sslcMarksheet'}, {name: 'pucMarksheet'}])
+
+const appUpload = upload.fields([{name: 'studentPic'}, {name: 'tc'}, {name: 'sslcMarksheet'}, {name: 'pucMarksheet'}])
+
 router.get('/applicationForm', isAuth, appController.getApplicationForm)
 
 
-router.post('/postApplication', [
+router.post('/postApplication', appUpload, 
+[
     body('dob').
     custom(async (value, {req}) =>{
     let date = new Date()
@@ -24,8 +37,6 @@ router.post('/postApplication', [
     }
     return true
     }),  
-    body('sslcPercentage').isLength({max:100, min:30}).withMessage('SSLC Percentage can\'t be less than 30 and above 100'),
-    body('pucPercentage').isLength({max:100, min:30}).withMessage('PUC Percentage can\'t be less than 30 and above 100')
     ] ,appController.postApplication)
 
 

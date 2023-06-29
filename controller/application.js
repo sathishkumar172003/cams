@@ -15,6 +15,9 @@ module.exports.postApplication = (req, res) => {
     
     console.log(current_user.id)
 
+    console.log(req.files['studentPic'][0].filename)
+
+    // studentPic = req.file.filename
 
 
     const errors = validationResult(req)
@@ -25,6 +28,8 @@ module.exports.postApplication = (req, res) => {
         return res.render('application-form.ejs',{isLoggedIn : isLoggedIn, current_user: current_user, errorMessage : errors.array()[0].msg})
 
     }
+
+
 
     User.findOne({where: {
         id : current_user.id
@@ -48,7 +53,7 @@ module.exports.postApplication = (req, res) => {
             gender: req.body.gender,
             percentage10: req.body.sslcPercentage,
             percentage12: req.body.pucPercentage,
-            profile: req.body.studentPic,
+            profile: req.files['studentPic'][0].filename,
             DOB: req.body.dob,
             age : age, 
             nationality: req.body.nationality,
@@ -60,9 +65,9 @@ module.exports.postApplication = (req, res) => {
             board10: req.body.sslcBoard,
             stream10: req.body.sslcStream,
             stream12:req.body.pucStream,
-            tc:  req.body.tc,
-            marksheet10: req.body.sslcMarksheet,
-            marksheet12: req.body.pucMarksheet,
+            tc:  req.files['tc'][0].filename,
+            marksheet10: req.files['sslcMarksheet'][0].filename,
+            marksheet12: req.files['pucMarksheet'][0].filename,
             formStatus:  req.body.status 
     
         })

@@ -37,9 +37,15 @@ module.exports.postSign = (req, res) =>{
     username = req.body.username
     email = req.body.email
     const confirmPassword = req.body.confirmPassword
+    console.log(req.body)
     hashedPassword = bcrypt.hashSync(req.body.password, 12) 
    
-    studentPic = req.body.studentPic
+    studentPic = req.file.filename
+    console.log(req.file)
+
+    
+
+    
 
     const errors = validationResult(req)
     if(!errors.isEmpty()) {
