@@ -1,3 +1,5 @@
+
+
 .admin_main a {
     text-decoration: none;
     color : white;
@@ -8,18 +10,58 @@
 }
 
 
+
+
 .application-info_header {
-    background-color:rgb(22, 71, 55); 
+    background-color: #1565c0; 
+    
 }
 
 .application-info_body {
-    background-color: rgb(9, 44, 32);
+   color: black;
+   background-color: #693BF1;
 }
 
 .application-info, .course-info, .notice-info {
     margin-top:100px;
 }
 
+
+.card-add-course {
+    width: 700px;
+    position: absolute;
+    left:550px;
+    top:350px;
+    background-color: rgb(63, 49, 13);
+}
+
+.card-add-course button,label {
+    margin-top:25px;
+}
+
+.card-add-course-message {
+    position: relative;
+    top: 100px;
+    left: 550px;
+    width:700px  
+}
+
+.course-table {
+    width:800px;
+    position: absolute;
+    top:150px;
+    left:500px;
+}
+
+.course-table table {
+    border-collapse: separate;
+    border-spacing: 3rem;
+}
+
+/* .course-table button {
+    border:5px solid blue;
+    background-color: rgb(202, 57, 17);
+} */
 
 
 

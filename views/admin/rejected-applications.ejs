@@ -1,0 +1,48 @@
+<%- include('../includes/admin_header') %>
+
+<%- include('../includes/admin_navbar') %> 
+
+
+ <%  if(applications.length == 0) { %> 
+    <h1> No Applications has been rejected !</h1>
+<%  } else { %> 
+    <div class="card bg-dark mt-5 " style="width:1200px; margin-left:300px;">
+
+
+        <table class="table text-white " style="font-size: 20px; ">
+            <thead>
+                <tr style="font-size:25px;">
+                    <th>Course Id : </th>
+                    <th>Course Name : </th>
+                    <th>Student Id :  </th>
+                    <th>Student Profile : </th>
+                    <th> Fee </th>
+                    <th> view   </th>
+                </tr>
+        
+                <% applications.forEach(application => { %>
+                    <tr>
+                        <td> <%= application.id %></td>
+                        <td><%= application.course %> </td>
+                        <td> <%= application.studentId %> </td>
+                        <td> <embed src="/uploaded-images/<%= application.profile %> " alt="student profile" height="70" width="100" class="mt-2"> </td>
+                        
+                       <%  if(application.payment == false) { %> 
+                            <td> Not Paid</td> 
+                        <% } else { %> 
+                            <td> Paid </td>
+                       <%  } %> 
+                        <!-- <td><button> <a href="/admin/updateapplication/<%= application.id %> "> Update </a> </button></td> -->
+                        <td><button> <a href="/admin/singleapplication/<%= application.id %> ">View</a> </button></td>
+                   
+                    </tr>
+                   
+            
+                <% }) %> 
+               
+            </thead>
+        </table>
+        </div>
+
+
+<% } %>

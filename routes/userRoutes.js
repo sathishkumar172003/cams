@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { check , body} = require('express-validator')
+const { Op } = require("sequelize");
 
 
 const bcrypt = require('bcryptjs')
@@ -59,16 +60,21 @@ custom(async (value, {req}) => {
     })
   
 }), 
-body('password').trim().custom(async (value, {req}) =>{
+body('password').custom(async (value, {req}) =>{
     await User.findOne({where: {email : email}}).then(user => {
         if(user){
-            let isUser = bcrypt.compareSync(value, user.password)
-            if(!isUser){
-                throw new Error('Password is incorrect ')
-            }
+             return bcrypt.compareSync(value, user.password)
+            
         }
+    }).then(isUser => {
+        if(!isUser){
+            throw new Error('Password is incorrect ')
+        }
+        return true
     })
-})], authController.postLogin)
+})
+]
+, authController.postLogin)
 
 
 
@@ -79,19 +85,24 @@ router.get('/logout',isAuth, authController.logout )
 
 router.get('/getApplications', isAuth, userController.getApplicationsRouter)
 
-router.get('/resetpassword',isAuth, authController.resetPassword)
+router.get('/resetpassword', authController.resetPassword)
 
 
-router.post('/resetpassword',isAuth, authController.postResetPassword)
+router.post('/resetpassword', authController.postResetPassword)
 
-router.get('/updateuser',isAuth, userController.updateUser)
+router.get('/updateuser',isAuth, authController.updateUser)
 
 
-router.post('/updateuser', isAuth, userController.postUpdateUser)
+router.post('/updateuser', upload.single('studentPic')
+,isAuth, authController.postUpdateUser)
 
 router.get('/payment', isAuth,userController.getPayment)
 
 router.get('/notifications', isAuth,userController.getNotification)
+
+
+
+router.get('/getpdf/:appId', isAuth, userController.getPdf)
 
 module.exports = router
 

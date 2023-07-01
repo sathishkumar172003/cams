@@ -2,25 +2,28 @@
 
 
 <div class="container">
+
+  
     <h1  class="mt-5"> <i class="fa-solid fa-graduation-cap"></i>Under Graduates Programmes </h1>
     <h3 class="mt-5"> B.Sc (Bachelor of Science)</h3>
     <ul class="list-group courses-list" style="position: relative; left:250px;" >
-        <li class="list-group-item text-bg-info" > Bio technology</li>
-        <li class="list-group-item text-bg-info">Bio Chemistry</li>
-        <li class="list-group-item text-bg-info"> Genetics </li>
-        <li class="list-group-item text-bg-info"> Microbiology</li>
-        <li class="list-group-item text-bg-info">Electronics </li>
-        <li class="list-group-item text-bg-info">Physics </li>
-        <li class="list-group-item text-bg-info">Zoology</li>
-        <li class="list-group-item text-bg-info">Computer Science</li>
-        <li class="list-group-item text-bg-info">Mathematics</li>
-        <li class="list-group-item text-bg-info">Statistics</li>
-        <li class="list-group-item text-bg-info" >Fashion and Apparel Design (FDO)</li>
+        <% courses.forEach(course =>{ %> 
+            <% if(course.department == 'BSC'){ %> 
+                <li class="list-group-item text-bg-info" > <%= course.courseName %> </li>
+
+            <% } %> 
+        <% }) %>    
     </ul>
 
     <h3 class="mt-5"> BCA (Bachelor of Computer Application)</h3>
     <ul class="list-group courses-list" style="position: relative; left:250px;">
-        <li class="list-group-item text-bg-primary">Computer Applications </li>
+
+        <% courses.forEach(course => { %> 
+            <% if(course.department == 'BCA'){ %> 
+                <li class="list-group-item text-bg-primary"><%= course.courseName %>  </li>
+            <% } %> 
+        <% }) %> 
+
     </ul>
 
     

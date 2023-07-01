@@ -1,5 +1,6 @@
 //importing modules 
 const bcrypt  = require('bcryptjs')
+const {Op} = require('sequelize')
 
 
 const {validationResult} = require("express-validator")
@@ -208,6 +209,68 @@ module.exports.postResetPassword = (req, res) => {
         req.flash('resetSuccess', 'your password has been succesfully updated !!!')
         req.session.save((err)=>{
             res.redirect('login')
+        })
+    })
+    .catch(err => console.log(err))
+
+}
+
+
+// --------------------------------------------UPDATING THE USER -----------------------
+
+module.exports.updateUser = (req, res) => {
+    let isLoggedIn =  req.session.isLoggedIn
+    let current_user = req.session.current_user
+    message = null
+  
+
+    res.render('users/update_user.ejs', {isLoggedIn : isLoggedIn, current_user : current_user ,
+    validationMsg : null, validationError : null })
+
+}
+
+
+
+
+module.exports.postUpdateUser = (req, res) => {
+    let isLoggedIn = req.session.isLoggedIn
+    let current_user = req.session.current_user
+
+    let username = req.body.username
+  
+    let profile = req.file.filename
+    //what if the email is already taken in that case check the
+    //later implement this function so far it is assumed that user will give unique email 
+    // if he gives the email which is already exists the app will crash . 
+
+    
+    
+    
+
+    User.findOne({where: {
+        id : current_user.id
+
+    }})
+    .then((user) => {
+        if(user) {
+            
+
+            user.update({
+               
+                username: username,
+                profile : profile    
+            })
+            return user.save()
+        }
+        
+    })
+    .then((user) => {
+        req.session.current_user = user;
+
+        
+        req.flash('userUpdateSuccess', `${username} has been updated successfully !!!`)
+        req.session.save((err) => {
+            res.redirect('userpage')
         })
     })
     .catch(err => console.log(err))

@@ -43,3 +43,11 @@ li{
     margin-bottom: 30px;
 }
 
+.notice-card {
+    background-color: rgb(43, 71, 71);
+    width:800px;
+    border-radius: 0px;
+}
+.notice-card p {
+    font-size: 20px;
+}

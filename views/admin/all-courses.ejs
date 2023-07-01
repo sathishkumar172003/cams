@@ -1,0 +1,43 @@
+<%- include('../includes/admin_header') %> 
+
+
+<%- include('../includes/admin_navbar') %> 
+
+
+
+
+<div class="card course-table">
+    <% if(courseDelete) { %> 
+        <div class="alert alert-danger mt-5 mb-3 " style="width: 800px;">
+            <%= courseDelete %>
+        </div>
+    <% } %> 
+
+   <% if(courseUpdate) { %> 
+        <div class="alert alert-success mt-5 mb-3 " style="width: 800px;">
+            <%= courseUpdate %> 
+        </div>
+   <% } %> 
+
+
+<table class="table table-dark mt-5">
+    <thead style="font-size: 20px;">
+        <th>Course Name</th>
+        <th>Department</th>
+        <th>Remove</th>
+        <th>Update</th>
+    </thead>
+
+    <tbody>
+        <% courses.forEach(course => { %> 
+            <tr> 
+                <td><%= course.courseName %> </td>
+                <td><%= course.department %> </td>
+                <td><button class="btn btn-danger"><a href="/admin/removecourse/<%= course.id %>"> Remove </a></button></td>
+                <td><button class="btn btn-light "><a href="/admin/updatecourse/<%= course.id %>"> Update </a></button></td>
+            </tr>
+       <%  }) %> 
+     
+    </tbody>
+</table>
+</div>

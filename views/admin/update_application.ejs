@@ -13,7 +13,7 @@
 
 <div class="container">
     <h1 class="mb-5 mt-5">Application form </h1>
-    <form action="/applications/updateApplication/<%= application.id %> " method="POST">
+    <form action="/admin/updateapplication/<%= application.id %>" method="POST" >
 
 
     <div class="row">
@@ -97,14 +97,7 @@
 
         <!-- course applied -->
 
-        <!-- student pic -->
-        <div class="card">
-            <div class="card-body">
-                <label  class="form-label">Student Pic</label>
-                <img src="<%= application.profile %>  " alt="student profile">
-            </div>
-        </div>
-        <!-- student pic  -->
+     
 
         <!-- father name -->
         <div class="card">
@@ -132,7 +125,7 @@
                 <div class="col">
                     <div class="card-body">
                         <label  class="form-label">Date of Birth</label>
-                        <input type="text" value="<%= application.DOB %> ">
+                        <input type="date" value="<%= application.DOB %> " name="dob" id="myTime">
                     </div>
                 </div>
                 <div class="col">
@@ -160,7 +153,7 @@
 
         <!-- DOB -->
 
-        <!-- Nationality -->
+        <!-- Nationality -->console.log('got the aplicaiton')
 
         <div class="card">
             <div class="card-body">
@@ -319,15 +312,27 @@
 
 
      
-            <h1>form status</h1>
-            <input type="text" name="status" value="<%= application.formStatus %> ">
+            <h1 class="mt-5">form status</h1>
+            <!-- <input type="text" name="status" value="<%= application.formStatus %> "> -->
 
             <!-- // start coding from here to display the list of options accepted, pending , rejected and allow the admin to select 
             so basically created a select option with 3 options (accepted, rejected, pending) -->
+      
+            <select name="formStatus" class="form-select mt-3" >
+                <option value="pending" selected> Pending </option>
+                <option value="Accepted">Accepted</option>
+                <option value="Rejected">Rejected</option>
+            </select>
+      
         </div>
     </div>
 
     <button type="submit" class="btn btn-lg btn-primary mt-5" >Submit Application </button>
 </form>
 </div>
+
+<script >
+document.getElementById("myTime").defaultValue = "<%= application.DOB %>";
+
+</script>
 

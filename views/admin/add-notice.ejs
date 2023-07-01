@@ -1,0 +1,35 @@
+<%- include('../includes/admin_header') %> 
+
+
+<%- include('../includes/admin_navbar') %> 
+
+<% if(addNoticeSuccess){ %> 
+    <div class="alert alert-success text-white text-center mt-5 card-add-course-message">
+        <%= addNoticeSuccess %> 
+    </div>
+    <% } %>
+    
+
+
+
+
+<div class="card card-add-course">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Add Notice</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="/admin/addnotice" method="POST">
+            
+            <label class="form-label"> Title  </label>
+            <input type="text" name="title" class="form-control" >
+
+            <label  class="form-label">  Content  : </label>
+            <input type="text" name="content"  class="form-control">
+
+            <button type="submit" class="btn btn-success">Add Notice </button>
+
+        </form>
+    </div>
+</div>

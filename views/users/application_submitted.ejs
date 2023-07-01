@@ -2,7 +2,7 @@
 
 <div class="container">
     <% if(!view) { %> 
-        <h4 class="text-danger mt-5 mb-4 text-center"> your aplication has been submitted  </h4>
+        <h4 class="text-success mt-5 mb-4 text-center"> your aplication has been submitted  </h4>
     <% } %> 
    
 <div class="card p-5">
@@ -157,6 +157,10 @@
     <p class="text-muted mt-4">You can pay the fees once your application gets submitted </p>
 
 
+
+    <div>
+        <button class="btn btn-success mt-5"><a href="/users/getpdf/<%= application.id %>" class="text-white" style="text-decoration: none;">Download Application pdf</a></button>
+    </div>
 
 </div>
 

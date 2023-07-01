@@ -1,0 +1,54 @@
+<%- include('../includes/admin_header') %> 
+
+<%- include('../includes/admin_navbar') %> 
+
+
+
+<div class="container">
+    <h1 class="mt-5"> Notice Board  </h1>
+
+    <% if(updateNotice) { %> 
+        <div class="alert alert-success mt-5 mb-3 " style="width: 800px;">
+            <%= updateNotice  %> 
+        </div>
+   <% } %> 
+
+
+   <% if(removeNotice) { %> 
+    <div class="alert alert-danger mt-5 mb-3 " style="width: 800px;">
+        <%= removeNotice  %> 
+    </div>
+<% } %> 
+    <div class="card ">
+
+        <table class="table table-dark mt-5">
+            <thead style="font-size: 20px;">
+                <th>Title </th>
+                <th>Content</th>
+                <th>Posted On </th>
+                <th>update</th>
+                <th>remove</th>
+            </thead>
+        
+            <tbody>
+                <% notices.forEach(notice => { %> 
+                    <tr> 
+                        
+                        <td><%= notice.title %> </td>
+                        <td><%= notice.content %> </td>
+                        <td > <%= notice.createdAt %> </td>
+                        <td><button class="btn btn-danger"><a href="/admin/updatenotice/<%= notice.id %>"> update </a></button></td>
+                        <td><button class="btn btn-light "><a href="/admin/removenotice/<%= notice.id %>"> remove </a></button></td>
+                        
+                    </tr>
+               <%  }) %> 
+             
+            </tbody>
+        </table>
+        </div>
+</div>
+
+
+
+
+

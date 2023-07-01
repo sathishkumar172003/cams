@@ -1,0 +1,25 @@
+<%- include('../includes/admin_header') %> 
+
+<%- include('../includes/admin_navbar') %> 
+
+
+<div class="card card-add-course">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Update Notice</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="/admin/updatenotice/<%= notice.id %>" method="POST">
+            
+            <label class="form-label"> Title </label>
+            <input type="text" name="title" class="form-control" value="<%= notice.title %>">
+
+            <label  class="form-label">Content: </label>
+            <input type="text" name="content"  class="form-control" value="<%= notice.content %>">
+
+            <button type="submit" class="btn btn-success"> Update </button>
+
+        </form>
+    </div>
+</div>

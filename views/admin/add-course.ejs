@@ -1,0 +1,36 @@
+<%- include('../includes/admin_header') %> 
+
+<%- include('../includes/admin_navbar') %> 
+
+
+<% if(addCourseFailure){ %> 
+    <div class="alert alert-danger text-white text-center mt-5 card-add-course-message" >
+        <%= addCourseFailure %> 
+    </div>
+<% } %> 
+
+<% if(addCourseSuccess){ %> 
+<div class="alert alert-success text-white text-center mt-5 card-add-course-message">
+    <%= addCourseSuccess %> 
+</div>
+<% } %>
+
+<div class="card card-add-course">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>Add Course</h3>
+        </div>
+    </div>
+    <div class="card-body">
+        <form action="/admin/addcourse" method="POST">
+            <label class="form-label"> department </label>
+            <input type="text" name="department" class="form-control" >
+
+            <label  class="form-label">Course name : </label>
+            <input type="text" name="course"  class="form-control">
+
+            <button type="submit" class="btn btn-success">Add course </button>
+
+        </form>
+    </div>
+</div>

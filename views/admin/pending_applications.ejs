@@ -6,36 +6,47 @@
 
 <div class="container mt-5 ">
 
-    <div class="card bg-dark">
+    <% if(message) { %>
+        <%= message %> 
+    <% } %> 
+
+
+   <%  if(applications.length == 0) { %>
+        <h1> No Application is pending </h1>
+    <% } else { %>
+        <div class="card bg-dark">
 
    
-    <table class="table text-white " style="font-size: 20px;">
-        <thead>
-            <tr style="font-size:25px;">
-                <th>Course Id : </th>
-                <th>Course Name : </th>
-                <th>Student Id :  </th>
-                <th>Student Profile : </th>
-                <th>View </th>
-                <th>Update</th>
-            </tr>
-
-            <% applications.forEach(application => { %>
-                <tr>
-                    <td> <%= application.id %></td>
-                    <td><%= application.course %> </td>
-                    <td> <%= application.studentId %> </td>
-                    <td> <%= application.profile %> </td>
-                    <td><button> <a href="/admin/singleapplication/<%= application.id %> ">View</a> </button></td>
-                    <td><button> <a href="/admin/updateapplication/<%= application.id %> "> Update </a> </button></td>
-                </tr>
-               
+            <table class="table text-white " style="font-size: 20px;">
+                <thead>
+                    <tr style="font-size:25px;">
+                        <th>Course Id : </th>
+                        <th>Course Name : </th>
+                        <th>Student Id :  </th>
+                        <th>Student Profile : </th>
+                        <th>View </th>
+                        <th>Update</th>
+                    </tr>
         
-            <% }) %> 
-           
-        </thead>
-    </table>
-</div>
+                    <% applications.forEach(application => { %>
+                        <tr>
+                            <td> <%= application.id %></td>
+                            <td><%= application.course %> </td>
+                            <td> <%= application.studentId %> </td>
+                            <td> <embed src="/uploaded-images/<%= application.profile %> " alt="student profile" height="70" width="100"> </td>
+                            <td><button> <a href="/admin/singleapplication/<%= application.id %> ">View</a> </button></td>
+                            <td><button> <a href="/admin/updateapplication/<%= application.id %> "> Update </a> </button></td>
+                        </tr>
+                       
+                
+                    <% }) %> 
+                   
+                </thead>
+            </table>
+        </div>
+  <%  } %>
+
+  
 
    
 </div>
