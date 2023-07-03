@@ -1,52 +1,66 @@
-<%- include('../includes/admin_header') %> 
+
 
 <%- include('../includes/admin_navbar') %> 
 
 
 
-<div class="container mt-5 ">
+<div id="main" >
+    <div class="container-fluid" style="position: relative; top:80px; ">
 
-    <% if(message) { %>
-        <%= message %> 
-    <% } %> 
+        <h2 class="ms-1  mb-5 text-white"> Pending Applications    </h2>
+        <% if(message) { %>
+            <div class="alert alert-success text-center ">
+                <%= message %>
+            </div>
+        
+        <% } %>
+
+        
 
 
    <%  if(applications.length == 0) { %>
-        <h1> No Application is pending </h1>
+    <div class="col-div-10" style='position: relative;top:40px;'>
+		<div class="box-8">
+		<div class="content-box">
+    <p> No Application is pending !  </p>
+    </div>
+    </div>
+    </div>
     <% } else { %>
-        <div class="card bg-dark">
+       
 
-   
-            <table class="table text-white " style="font-size: 20px;">
-                <thead>
-                    <tr style="font-size:25px;">
-                        <th>Course Id : </th>
-                        <th>Course Name : </th>
-                        <th>Student Id :  </th>
-                        <th>Student Profile : </th>
-                        <th>View </th>
-                        <th>Update</th>
-                    </tr>
-        
-                    <% applications.forEach(application => { %>
-                        <tr>
-                            <td> <%= application.id %></td>
-                            <td><%= application.course %> </td>
-                            <td> <%= application.studentId %> </td>
-                            <td> <embed src="/uploaded-images/<%= application.profile %> " alt="student profile" height="70" width="100"> </td>
-                            <td><button> <a href="/admin/singleapplication/<%= application.id %> ">View</a> </button></td>
-                            <td><button> <a href="/admin/updateapplication/<%= application.id %> "> Update </a> </button></td>
+
+              
+                <table class="table text-white " style="font-size: 18px;">
+                    <thead>
+                        <tr style="font-size:20px;">
+                            <th>Course Id : </th>
+                            <th>Course Name : </th>
+                            <th>Student Id :  </th>
+                            <th>Student Profile : </th>
+                            <th>View </th>
+                            <th>Update </th>
                         </tr>
-                       
+    
+                        <% applications.forEach(application => { %>
+                            <tr>
+                                <td> <%= application.id %></td>
+                                <td><%= application.course %> </td>
+                                <td> <%= application.studentId %> </td>
+                                <td> <embed src="/uploaded-images/<%= application.profile %> " alt="student profile" height="70" width="100"> </td>
+                                <td><button class="btn btn-success mt-3" > <a class="text-white" href="/admin/singleapplication/<%= application.id %> ">View</a> </button></td>
+                                <td><button class="btn btn-warning mt-3"> <a class="text-dark" href="/admin/updateapplication/<%= application.id %> "> Update </a> </button></td>
+                            </tr>
+    
+    
+                        <% }) %>
+    
+                    </thead>
+                </table>    
                 
-                    <% }) %> 
-                   
-                </thead>
-            </table>
-        </div>
-  <%  } %>
-
-  
-
    
+
+<%  } %>
 </div>
+</body>
+</html> 

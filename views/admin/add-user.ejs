@@ -1,0 +1,63 @@
+<%- include('../includes/admin_navbar') %> 
+
+
+
+<div id="main">
+    <div class="container-fluid " style="position: relative; top:105px; ">
+      
+        <% if(message){ %> 
+            <div class="alert alert-danger text-center ms-2" style="width: 1409px;">
+                <%= message %> 
+            </div>
+            <% } %> 
+
+            
+
+            <div class="col-div-10" >
+                <div class="box-8" style="height:650px;">
+                <div class="content-box mt-5">
+                    <div class="card box" >
+                        <div class="card-header">
+                            <div class="card-title">
+                                <h3 class="text-white">Add User</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form action="/admin/adduser" method="POST"  novalidate enctype="multipart/form-data" >
+                                <label class="form-label text-warning">Enter your name</label>
+                                <input type="text" name="username" class="form-control mb-3" >
+                    
+                                <label  class="form-label text-warning">Enter your email</label>
+                                <input type="email" name="email"  
+                                    class="<%= validationError.find(e => e.path == 'email') ? 'form-control is-invalid mb-3' : 'form-control mb-3' %>" >
+                    
+                                    <label  class="form-label text-warning">Enter your password</label>
+                
+                                    <input type="password" name="password"  
+                                    class="<%= validationError.find(e => e.path == 'password') ? 'form-control is-invalid mb-3' : 'form-control mb-3' %>"  >
+                    
+                
+                                    
+                                <label  class="form-label text-warning"> confirm password </label>
+                                <input type="password" name="confirmPassword" 
+                                class="<%= validationError.find(e => e.path == 'password') ? 'form-control is-invalid mb-3' : 'form-control mb-2'%>" >
+                
+                                <label  class="form-label text-warning" >Student Pic</label>
+                                <input type="file" name="studentPic"  class="form-control"> <br> 
+                                <button type="submit" class="btn  btn-primary" style="margin-top:20px;">Register</button>
+                                
+                            </form>
+                        </div>
+                    </div>
+                    
+
+                </div>
+                </div>
+            </div>
+
+
+    </div>
+  
+</div>
+
+    

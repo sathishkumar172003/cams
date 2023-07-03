@@ -3,7 +3,9 @@ const Application = require('../model/application')
 const Course = require('../model/courses')
 const User = require('../model/user')
 const Notice = require('../model/notices')
-const { Model } = require('sequelize')
+const bcrypt = require('bcryptjs')
+
+const { validationResult } = require('express-validator')
 
 
 module.exports.adminPage = (req, res) => {
@@ -370,4 +372,112 @@ module.exports.postAddNotice = (req, res) => {
             return res.redirect("/admin/addnotice")
         })
     })
+}
+
+
+// ------------------------------------------users---------------------------------------
+
+module.exports.allUsers = (req, res) =>{
+let message = req.flash('success')
+let updateSuccess = req.flash('updateSuccess')
+
+if(updateSuccess.length > 0){
+    updateSuccess = updateSuccess[0]
+} else {
+    updateSuccess = null
+}
+if(message.length > 0){
+    message = message[0]
+} else {
+    message = null
+}
+
+ User.findAll()
+ .then(users => {
+    res.render('admin/all-users.ejs', {users : users, message: message, updateSuccess: updateSuccess})
+ })  
+ .catch(err => console.log(err))
+}
+
+
+module.exports.addUser = (req, res) => {
+    let message = req.flash('failure')
+   
+
+    if(message.length > 0){
+        message = message[0]
+    } else {
+        message = null
+    }
+    res.render('admin/add-user.ejs', {validationError: [], message: message})
+}
+
+
+
+module.exports.postAddUser = (req, res) => {
+    let hashedPassword;
+
+    var errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        return res.render('admin/add-user.ejs', {validationError : errors.array(), message : errors.array()[0].msg})
+    }
+
+    bcrypt.hash(req.body.password, 12)
+    .then(hashedPassword => {
+        hashedPassword = hashedPassword
+        return User.create({
+            username : req.body.username,
+            email : req.body.email  , 
+            password : hashedPassword,
+            profile : req.file.filename
+        })
+    })
+    .then(user => {
+        req.flash('success',    `user ${user.email} has been successfully registered !`)
+        req.session.save(err => {
+            res.redirect('/admin/allusers')
+        })
+    })
+    .catch(err => console.log(err))
+   
+}
+
+
+module.exports.updateUser = (req, res) => {
+    let userId = req.params.userId 
+    User.findOne({where: {id : userId}})
+    .then(user => {
+        console.log(user.username)
+        res.render('admin/update-user.ejs', {user : user})
+    }) 
+}
+
+
+module.exports.postUpdateUser = (req, res) => {
+    let userId = req.params.userId 
+
+    User.findOne({where: {
+        id : userId
+
+    }})
+    .then((user) => {
+        if(user) {
+            
+
+            user.update({
+               
+                username: req.body.username,
+                profile : req.file.filename   
+            })
+            return user.save()
+        }
+        
+    })
+    .then(result => {
+        req.flash('updateSuccess', `user ${result.username} has been updated !`)
+        req.session.save(err => {
+            res.redirect("/admin/allusers")
+        })
+    })
+    .catch(err => console.log(err))
 }

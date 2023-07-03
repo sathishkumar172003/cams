@@ -1,5 +1,71 @@
-<%- include('../includes/admin_header') %> 
 
 <%- include('../includes/admin_navbar') %> 
 
+<div id="main">
 
+
+
+<div class="container-fluid " style="position: relative; top:25px; ">
+    <h2 class="mt-5 ms-1 mb-5 text-white"> Student list </h2>
+    <% if(message){ %> 
+        <div class="alert alert-success text-center ms-2" style="width: 1409px;">
+            <%= message %> 
+        </div>
+        <% } %>
+
+
+        <% if(updateSuccess){ %> 
+            <div class="alert alert-success text-center ms-2" style="width: 1409px;">
+                <%= updateSuccess %> 
+            </div>
+            <% } %>
+
+
+ <% if(users.length  == 0){ %> 
+    <div class="col-div-8">
+		<div class="box-8">
+		<div class="content-box">
+    <p> Student list is empty !  </p>
+    </div>
+    </div>
+    </div>
+ <% }else { %> 
+ 
+    
+    
+      
+            <table class="table ">
+                <thead style="font-size: 20px;">
+                    <th> UID </th>
+                    <th>username </th>
+                    <th>Email  </th>
+                    <th>Profile</th>
+                    <th>Update</th>
+                    
+                </thead>
+            
+                <tbody>
+                    <% users.forEach(user => { %> 
+                        <tr> 
+                            
+                            <td><%= user.id %> </td>
+                            <td><%= user.username %> </td>
+                            <td > <%= user.email %> </td>
+                            <td><img src="/uploaded-images/<%= user.profile %>" alt="" height="50px;" width="50px;"></td>
+                            <td><button class="btn btn-light "><a href="/admin/updateuser/<%= user.id %>" class="text-dark" style="text-decoration: none;"> update </a></button></td>
+                            
+                        </tr>
+                   <%  }) %> 
+                 
+                </tbody>
+            </table>
+           
+ 
+ <% } %>
+
+
+
+
+    </div>
+
+</div>

@@ -1,67 +1,86 @@
-<%-  include('../includes/admin_header') %> 
-   <%- include('../includes/admin_navbar.ejs') %> 
-<div class="container">
-    <div class="admin_main mt-5">
 
-        <!-- application-info  -->
-        <div class="card application-info" >
-            <div class="card-header application-info_header" >
-                <h2 class="card-title">Application Information</h2>
-            </div>
-            <div class="card-body application-info_body"  >
-                <h5 > <a href="/admin/pendingapplications" > Pending Applications </a></h5>
-                <h5 > <a href="/admin/acceptedapplications" > Accepted Applications</a> </h5>
-                <h5 > <a href="/admin/rejectedapplications" > Rejected Applications</a> </h5>
 
-            </div>
-        </div>
-        <!-- application-info  -->
+<%- include('../includes/admin_navbar') %>
 
-        <!-- courses-info  -->
-        <div class="card course-info">
-            <div class="card-header application-info_header" >
-                <h2 class="card-title"> UG Courses Information</h2>
-            </div>
-            <div class="card-body application-info_body" >
-                <h5 > <a href="/admin/allcourses" > all couses  </a></h5>
-                <h5 > <a href="/admin/addcourse" > add courses </a> </h5>
-            
 
-            </div>
-        </div>
 
-        <!-- courses-info  -->
-
-        <!-- notices  -->
-
-        <div class="card notice-info">
-            <div class="card-header application-info_header" >
-                <h2 class="card-title"> Notices </h2>
-            </div>
-            <div class="card-body application-info_body" >
-                <h5 > <a href="/admin/allnotices" > Recent notices  </a></h5>
-                <h5 > <a href="/admin/addnotice" > add notices  </a> </h5>
-            </div>
-        </div>
-
-        <!-- notices  -->
-
-        <!-- users-info  -->
-
-        <div class="card notice-info">
-            <div class="card-header application-info_header" >
-                <h2 class="card-title"> Users  </h2>
-            </div>
-            <div class="card-body application-info_body" >
-                <h5 > <a href="" > All users </a></h5>
-                <h5 > <a href="" > add users </a></h5>
-            </div>
-        </div>
-
-        <!-- users-info  -->
-
-    </div>
 </div>
 
+<!-- home page -->
+<div id="main" style="margin-left:350px;">
+
+	<h1 class="text-white text-center mt-5" style="position:relative; left:-25px;">The Oxford College of Science</h1>
+	<p class="text-white text-center " style="position:relative; left:-35px;">No.32, 17th B Main, Sector IV, HSR Layout
+            Bengaluru 560 102</p>
+
+	<div class="head">
+		<div class="col-div-6">
+<span style="font-size:30px;cursor:pointer; color: white;" class="nav mt-5 mb-4"  >&#9776; Dashboard</span>
+<span style="font-size:30px;cursor:pointer; color: white;" class="nav2"  >&#9776; Dashboard</span>
+<div style="position: relative; left:580px; top:-75px;">
+<div class="profile">
+
+	<img src="images/user.png" class="pro-img" />
+	<p> Sathish Kumar <span>Admin </span></p>
+</div>
+</div>
+
+</div>
+
+<!-- admin username  -->
+
+	<div class="clearfix"></div>
+</div>
+
+	<div class="clearfix"></div>
+	<br/>
+<!-- number of students  -->
+	<div class="col-div-4">
+		<div class="box" >
+			<p> 67 <br/><span>Students</span></p>
+			<i class="fa fa-users box-icon"></i>
+		</div>
+	</div>
+<!-- number of applictions  -->
+	<div class="col-div-4">
+		<div class="box">
+			<p>88<br/><span>Applications</span></p>
+			<i class="fa fa-list box-icon"></i>
+		</div>
+	</div>
+
+<!-- number of courses  -->
+	<div class="col-div-4">
+		<div class="box">
+			<p>99<br/><span>Courses</span></p>
+			<i class="fa fa-shopping-bag box-icon"></i>
+		</div>
+	</div>
+<!-- number of notices  -->
+	<div class="col-div-4 mt-5">
+		<div class="box">
+			<p>78<br/><span>Notices</span></p>
+			<i class="fa fa-tasks box-icon"></i>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script src="./javascript/index.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </body>
+
+
 </html>

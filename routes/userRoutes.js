@@ -2,13 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { check , body} = require('express-validator')
 const { Op } = require("sequelize");
-
-
 const bcrypt = require('bcryptjs')
 
-// const multer = require('multer')
-// const upload_mutter = require('../util/upload-middleware')
-// const upload = multer({storage: upload_mutter.files.storage()})
 
 const upload = require('../util/upload')
 
@@ -19,6 +14,7 @@ const authController = require('../controller/auth')
 const User = require('../model/user')
 
 const isAuth = require('../middlewares/is_auth')
+
 
 
 router.get('/sign', authController.signup)

@@ -1,43 +1,67 @@
-<%- include('../includes/admin_header') %> 
 
 
 <%- include('../includes/admin_navbar') %> 
+<div id="main">
+    <div class="container-fluid" style="position: relative; top:25px; ">
+        <h2 class="mt-5 ms-1 mb-5 text-white"> Courses   </h2>
+
+      
+    
+      
+        
+
+
+       
+              
+
+                <table class="table  " >
+                    <% if(courseUpdate) { %> 
+                        <div class="alert alert-success mt-5 mb-3  text-center " >
+                            <%= courseUpdate %> 
+                        </div>
+                   <% } %> 
+
+                   <% if(courseDelete) { %> 
+                    <div class="alert alert-danger mt-5 mb-3  text-center" >
+                        <%= courseDelete %>
+                    </div>
+                <% } %> 
+                    <thead style="font-size: 20px;">
+                        <th>Course Name</th>
+                        <th>Department</th>
+                        <th>Remove</th>
+                        <th>Update</th>
+                    </thead>
+                
+                    <tbody>
+                        <% courses.forEach(course => { %> 
+                            <tr> 
+                                <td><%= course.courseName %> </td>
+                                <td><%= course.department %> </td>
+                                <td><button class="btn btn-danger"><a href="/admin/removecourse/<%= course.id %>"> Remove </a></button></td>
+                                <td><button class="btn btn-light "><a href="/admin/updatecourse/<%= course.id %>"> Update </a></button></td>
+                            </tr>
+                       <%  }) %> 
+                     
+                    </tbody>
+                </table>
 
 
 
+                
 
-<div class="card course-table">
-    <% if(courseDelete) { %> 
-        <div class="alert alert-danger mt-5 mb-3 " style="width: 800px;">
-            <%= courseDelete %>
+
+            </div>
+            </div>
         </div>
-    <% } %> 
+        
 
-   <% if(courseUpdate) { %> 
-        <div class="alert alert-success mt-5 mb-3 " style="width: 800px;">
-            <%= courseUpdate %> 
         </div>
-   <% } %> 
+    </div>
 
 
-<table class="table table-dark mt-5">
-    <thead style="font-size: 20px;">
-        <th>Course Name</th>
-        <th>Department</th>
-        <th>Remove</th>
-        <th>Update</th>
-    </thead>
 
-    <tbody>
-        <% courses.forEach(course => { %> 
-            <tr> 
-                <td><%= course.courseName %> </td>
-                <td><%= course.department %> </td>
-                <td><button class="btn btn-danger"><a href="/admin/removecourse/<%= course.id %>"> Remove </a></button></td>
-                <td><button class="btn btn-light "><a href="/admin/updatecourse/<%= course.id %>"> Update </a></button></td>
-            </tr>
-       <%  }) %> 
-     
-    </tbody>
-</table>
-</div>
+
+
+ 
+

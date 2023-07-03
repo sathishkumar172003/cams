@@ -1,25 +1,41 @@
-<%- include('../includes/admin_header') %> 
+
 
 <%- include('../includes/admin_navbar') %> 
 
+<div id="main">
 
-<div class="card card-add-course">
-    <div class="card-header">
-        <div class="card-title">
-            <h3>Update Notice</h3>
+    <div class="container-fluid" style="position: relative; top:105px; ">
+
+        <div class="col-div-10">
+            <div class="box-8">
+            <div class="content-box mt-5">
+
+                <div class="card box">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <h3 class="text-white">Update Notice</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/updatenotice/<%= notice.id %>" method="POST">
+                            
+                            <label class="form-label text-warning mb-2" > Title </label>
+                            <input type="text" name="title" class="form-control" value="<%= notice.title %>">
+                
+                            <label  class="form-label text-warning mt-3">Content: </label>
+                            <input type="text" name="content"  class="form-control" value="<%= notice.content %>">
+                
+                            <button type="submit" class="btn btn-warning mt-4"> Update </button>
+                
+                        </form>
+                    </div>
+                </div>
+
+
+            </div>
+            </div>
         </div>
+
     </div>
-    <div class="card-body">
-        <form action="/admin/updatenotice/<%= notice.id %>" method="POST">
-            
-            <label class="form-label"> Title </label>
-            <input type="text" name="title" class="form-control" value="<%= notice.title %>">
 
-            <label  class="form-label">Content: </label>
-            <input type="text" name="content"  class="form-control" value="<%= notice.content %>">
-
-            <button type="submit" class="btn btn-success"> Update </button>
-
-        </form>
-    </div>
 </div>
