@@ -1,0 +1,46 @@
+
+<!Doctype HTML>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+ <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-css.css">
+	<link rel="stylesheet" href="/css/admin_styles_2.css" type="text/css"/>
+ 
+</head>
+
+
+<body>
+
+
+
+    <div class="container" style="background-color:#272c4a ; position: relative ; top:200px ; left:0px; width:500px; height:550px; padding:20px;">
+        <%  if(updateSuccess) { %> 
+            <div class="alert alert-success">
+                <%= updateSuccess %> 
+            </div>
+        <% } %> 
+        
+        <h3 class="text-white text-center mb-5 ">Admin Page</h3>
+        <img src="/uploaded-images/<%= current_admin.profile %>" alt="admin profile" height="250px;" width="250px;" style="border: 5px solid black; vertical-align: middle;
+        width: 180px;
+        height: 180px;
+        margin-left:145px;
+        " >
+
+        <h5 class="text-white  mt-5 ">name :  <%= current_admin.adminName %> </h3>
+        <h5 class="text-white  mt-3 mb-4" >email : <%= current_admin.email %> </h3>
+       <button class="btn btn-warning " style="width:200px; margin-right:50px;"> <a href="/admin/updateadmin/<%= current_admin.id %>" style="text-decoration: none; "   class="text-dark">  Update </a> </button>
+       <button class="btn btn-success" style="width:200px;"> <a href="/admin/logout" class="text-white" style="text-decoration: none;">Logout</a> </button>
+
+
+
+    
+    </div>
+ 
+   

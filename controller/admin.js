@@ -3,21 +3,181 @@ const Application = require('../model/application')
 const Course = require('../model/courses')
 const User = require('../model/user')
 const Notice = require('../model/notices')
+const Admin = require('../model/admin')
 const bcrypt = require('bcryptjs')
 
 const { validationResult } = require('express-validator')
 
 
+// --------------------------homepage, login, register controls --------------------------
+
 module.exports.adminPage = (req, res) => {
 
-    res.render('admin/admin_homepage.ejs')
+    let adminLogin = req.flash('adminLogin')
+    if(adminLogin.length > 0){
+        adminLogin = adminLogin[0]
+    } else {
+        adminLogin = null
+    }
+
+    let totApplications;
+    let totCourses;
+    let totUsers;
+    let totNotices;
+    Application.findAll()
+    .then(applications => {
+        
+        totApplications = applications.length  
+        return User.findAll()
+
+    })
+    .then(users =>{
+        totUsers = users.length
+        return Notice.findAll()
+        
+    })
+    .then(notices => {
+        totNotices = notices.length;
+        return  Course.findAll()
+    })
+    .then(courses => {
+        totCourses = courses.length
+        res.render('admin/admin_homepage.ejs', {
+            totApplications : totApplications,
+            totCourses: totCourses, 
+            totNotices: totNotices, 
+            totUsers : totUsers, 
+            adminLogin : adminLogin,
+        current_admin : req.session.current_admin})
+    })    
 }
 
 
 module.exports.adminGetRegister = (req, res) => {
-    res.render('admin/register.ejs')
+    res.render('admin/admin-register.ejs', {message : null})
 }
 
+module.exports.postRegister = (req, res) => {
+   
+
+    //add validation error to the router to see if the emai already exists or not 
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()){
+        return res.render('admin/admin-register.ejs', {message : errors.array()[0].msg})
+    }
+
+    bcrypt.hash(req.body.password, 12)
+    .then(hashedPassword =>  {
+        return Admin.create({
+            adminName: req.body.adminName,
+            email : req.body.email, 
+            password : hashedPassword,
+            profile : req.file.filename
+        })
+    })
+    .then (admin => {
+        
+        // once the admin registered redirect to login page and then home page 
+        req.flash('adminRegister', `admin account ${admin.adminName} created successfully !!`)
+        req.session.save(err => {
+            return res.redirect('/admin/login')
+        })
+    })
+
+}
+
+
+module.exports.adminLogin = (req, res) => {
+    let adminRegister = req.flash('adminRegister')
+    if(adminRegister.length > 0) {
+        adminRegister = adminRegister[0]
+    } else {
+        adminRegister = null;
+    }
+    res.render('admin/admin-login.ejs', {message : null, adminRegister : adminRegister})
+}
+
+module.exports.adminPostLogin = (req, res) => {
+
+    const errors = validationResult(req)
+    if(!errors.isEmpty()) {
+        return res.render('admin/admin-login.ejs', {message: errors.array()[0].msg, adminRegister : null })
+    }
+
+    Admin.findOne({where: {email : req.body.email}})
+    .then(admin => {
+        req.session.current_admin = admin 
+        req.session.adminLoggedIn = true
+        req.flash('adminLogin', `admin ${admin.adminName} has been successfully logged in !`)
+        req.session.save(err => {
+            return res.redirect('/admin')
+        })
+    })
+
+}
+
+module.exports.adminAccountPage =(req,res) => {
+
+    let updateSuccess = req.flash('updateSuccess')
+    if(updateSuccess.length > 0){
+        updateSuccess = updateSuccess[0]
+    } else {
+        updateSuccess = null
+    }
+
+    let current_admin = req.session.current_admin
+    res.render('admin/admin-page.ejs', {current_admin : current_admin, updateSuccess: updateSuccess})
+    
+}
+
+module.exports.adminLogout = (req, res) => {
+    req.session.destroy((err) => {
+        if(!err){
+            res.redirect('/admin/login')
+        }
+        else {
+            console.log(err)
+        }
+
+    })
+  
+}
+
+module.exports.updateAdmin = (req, res) => {
+    let adminId = req.params.adminId
+    console.log(adminId)
+    Admin.findOne({where: {
+        id : adminId
+    }})
+    .then(admin => {
+
+        res.render('admin/update-admin.ejs', {admin : admin})
+    })
+}
+
+module.exports.postUpdateAdmin = (req, res) => {
+    let adminId = req.params.adminId
+    Admin.findOne({wher: {
+        id: adminId
+    }})
+    .then(admin => {
+        admin.update({
+            adminName :req.body.adminName,
+            profile :  req.file.filename
+        })
+        req.session.current_admin = admin
+        return admin.save()
+    })
+    .then(result => {
+        req.flash('updateSuccess', ` Admin account ${result.adminName} has been updated successfully !`)
+        req.session.save(err => {
+            res.redirect('/admin/adminpage')
+        })
+    })
+}
+
+// ----------------------------------applications ---------------------------------------
 
 module.exports.pendingApplications = (req, res) => {
 
@@ -32,7 +192,7 @@ module.exports.pendingApplications = (req, res) => {
         formStatus : 'pending'
     }})
     .then((applications) => {
-        res.render('admin/pending_applications.ejs', {applications: applications, message : message})
+        res.render('admin/pending_applications.ejs', {applications: applications, message : message, current_admin : req.session.current_admin})
     })
 }
 
@@ -42,7 +202,7 @@ module.exports.viewSingleApplication = (req, res) => {
         id: appId
     }})
     .then(application => {
-        res.render('admin/single_application.ejs',{application : application })
+        res.render('admin/single_application.ejs',{application : application , current_admin : req.session.current_admin})
     })
     .catch(err => console.log(err))
     
@@ -56,7 +216,7 @@ module.exports.getUpdateApplication = (req, res) => {
     }})
     .then(application => {
         
-        res.render('admin/update_application.ejs', {application: application})
+        res.render('admin/update_application.ejs', {application: application, current_admin : req.session.current_admin})
     })
     
 }
@@ -117,7 +277,7 @@ module.exports.acceptedApplications = (req, res)  => {
         formStatus: 'Accepted'
     }})
     .then(applications => {
-        res.render('admin/accepted-applications.ejs', {applications: applications})
+        res.render('admin/accepted-applications.ejs', {applications: applications , current_admin : req.session.current_admin})
     })
     
 }
@@ -131,7 +291,7 @@ module.exports.rejectedApplications = (req, res) => {
         formStatus: 'Rejected'
     }})
     .then(applications => {
-        res.render('admin/rejected-applications.ejs', {applications: applications})
+        res.render('admin/rejected-applications.ejs', {applications: applications , current_admin : req.session.current_admin})
     })
 }
 
@@ -156,7 +316,7 @@ module.exports.addCourse = (req, res) =>{
         addCourseFailure = null
     }
     res.render('admin/add-course.ejs', {addCourseSuccess : addCourseSuccess,
-    addCourseFailure : addCourseFailure, editing:editing})
+    addCourseFailure : addCourseFailure, editing:editing , current_admin : req.session.current_admin})
 }
 
 module.exports.postAddCourse = (req, res) => {
@@ -208,7 +368,7 @@ module.exports.allCourses = (req, res) => {
     }
 
     Course.findAll().then(courses => {
-        res.render('admin/all-courses.ejs', {courses: courses, courseDelete : courseDelete, courseUpdate : courseUpdate})
+        res.render('admin/all-courses.ejs', {courses: courses, courseDelete : courseDelete, courseUpdate : courseUpdate , current_admin : req.session.current_admin})
     }).catch(err => console.log(err))
     
 }
@@ -239,7 +399,7 @@ module.exports.updateCourse = (req, res) => {
 
     Course.findOne({where: {id :cId}})
     .then(course => {
-        res.render('admin/update-course.ejs', { course : course})
+        res.render('admin/update-course.ejs', { course : course , current_admin : req.session.current_admin})
     })
     .catch(err => console.log(err))
 
@@ -290,7 +450,7 @@ module.exports.allNotices = (req, res) =>{
 
     Notice.findAll()
     .then(notices => {
-        res.render('admin/all-notices.ejs', {notices : notices, updateNotice : updateNotice, removeNotice: removeNotice})
+        res.render('admin/all-notices.ejs', {notices : notices, updateNotice : updateNotice, removeNotice: removeNotice , current_admin : req.session.current_admin})
     })
     .catch(err => console.log(err))
 
@@ -301,7 +461,7 @@ module.exports.updateNotice = (req, res) =>{
     let nId = req.params.nId
     Notice.findOne({where: {id : nId}})
     .then(notice => {
-        res.render('admin/update-notice.ejs', {notice: notice})
+        res.render('admin/update-notice.ejs', {notice: notice , current_admin : req.session.current_admin})
     })
     .catch(err => console.log(err))
 
@@ -355,7 +515,7 @@ module.exports.addNotice = (req, res) => {
     } else {
         addNoticeSuccess = null
     }
-    res.render('admin/add-notice.ejs', {addNoticeSuccess : addNoticeSuccess})
+    res.render('admin/add-notice.ejs', {addNoticeSuccess : addNoticeSuccess , current_admin : req.session.current_admin})
 }
 
 module.exports.postAddNotice = (req, res) => {
@@ -394,7 +554,7 @@ if(message.length > 0){
 
  User.findAll()
  .then(users => {
-    res.render('admin/all-users.ejs', {users : users, message: message, updateSuccess: updateSuccess})
+    res.render('admin/all-users.ejs', {users : users, message: message, updateSuccess: updateSuccess , current_admin : req.session.current_admin})
  })  
  .catch(err => console.log(err))
 }
@@ -409,7 +569,7 @@ module.exports.addUser = (req, res) => {
     } else {
         message = null
     }
-    res.render('admin/add-user.ejs', {validationError: [], message: message})
+    res.render('admin/add-user.ejs', {validationError: [], message: message , current_admin : req.session.current_admin})
 }
 
 
@@ -419,7 +579,7 @@ module.exports.postAddUser = (req, res) => {
 
     var errors = validationResult(req)
     if(!errors.isEmpty()) {
-        return res.render('admin/add-user.ejs', {validationError : errors.array(), message : errors.array()[0].msg})
+        return res.render('admin/add-user.ejs', {validationError : errors.array(), message : errors.array()[0].msg , current_admin : req.session.current_admin})
     }
 
     bcrypt.hash(req.body.password, 12)
@@ -448,7 +608,7 @@ module.exports.updateUser = (req, res) => {
     User.findOne({where: {id : userId}})
     .then(user => {
         console.log(user.username)
-        res.render('admin/update-user.ejs', {user : user})
+        res.render('admin/update-user.ejs', {user : user , current_admin : req.session.current_admin})
     }) 
 }
 

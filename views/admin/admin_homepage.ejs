@@ -8,6 +8,11 @@
 
 <!-- home page -->
 <div id="main" style="margin-left:350px;">
+	<% if(adminLogin) { %> 
+		<div class="alert alert-success text-center">
+			<%= adminLogin %>      	
+		</div>
+	<% } %> 
 
 	<h1 class="text-white text-center mt-5" style="position:relative; left:-25px;">The Oxford College of Science</h1>
 	<p class="text-white text-center " style="position:relative; left:-35px;">No.32, 17th B Main, Sector IV, HSR Layout
@@ -20,8 +25,7 @@
 <div style="position: relative; left:580px; top:-75px;">
 <div class="profile">
 
-	<img src="images/user.png" class="pro-img" />
-	<p> Sathish Kumar <span>Admin </span></p>
+
 </div>
 </div>
 
@@ -32,19 +36,21 @@
 	<div class="clearfix"></div>
 </div>
 
+
+
 	<div class="clearfix"></div>
 	<br/>
 <!-- number of students  -->
 	<div class="col-div-4">
 		<div class="box" >
-			<p> 67 <br/><span>Students</span></p>
+			<p style="font-size: x-large;"> <%= totUsers %>  <br/><span>Students</span></p>
 			<i class="fa fa-users box-icon"></i>
 		</div>
 	</div>
 <!-- number of applictions  -->
 	<div class="col-div-4">
 		<div class="box">
-			<p>88<br/><span>Applications</span></p>
+			<p style="font-size: x-large;"> <%= totApplications %> <br/><span>Applications</span></p>
 			<i class="fa fa-list box-icon"></i>
 		</div>
 	</div>
@@ -52,14 +58,14 @@
 <!-- number of courses  -->
 	<div class="col-div-4">
 		<div class="box">
-			<p>99<br/><span>Courses</span></p>
+			<p style="font-size: x-large;"><%= totCourses %> <br/><span>Courses</span></p>
 			<i class="fa fa-shopping-bag box-icon"></i>
 		</div>
 	</div>
 <!-- number of notices  -->
 	<div class="col-div-4 mt-5">
 		<div class="box">
-			<p>78<br/><span>Notices</span></p>
+			<p style="font-size: x-large;"><%= totNotices %> <br/><span>Notices</span></p>
 			<i class="fa fa-tasks box-icon"></i>
 		</div>
 	</div>
