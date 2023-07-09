@@ -24,10 +24,14 @@ module.exports.getPayment = (req, res) => {
         line_items : [{ 
             price_data: { 
               currency: "inr", 
+              
               product_data: { 
                 name: 'Course Name: '+ application.course, 
+                
+                
               }, 
-              unit_amount: 100
+              unit_amount: 50000 * 100
+              
             }, 
             quantity: 1, 
           }, ],
