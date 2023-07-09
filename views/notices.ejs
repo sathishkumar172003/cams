@@ -5,21 +5,29 @@
 
     <h1 class="mt-5 mb-5"> Notice Board </h1>
 
-    <% notices.forEach(notice => { %> 
-        <div class="card notice-card mt-5">
-            <div class="card-header">
-                <h2 class="card-title"> <%= notice.title %> </h3>
+    <div class="row">
+        <% notices.forEach(notice => { %> 
+        <div class="col mt-4">
+            <div class="card  mt-3" style="width: 600px; height:350px;">
+                <div class="card-header " style="background-color: #2b6777; color:white;">
+                    <h2 class="card-title"> <%= notice.title %> </h3>
+                </div>
+                <div class="card-body" style="background-color: #c8d8e4;">
+                    <p style="font-size: 20px;"> <%= notice.content %> </p>
+                </div>
+                <div class="card-footer " style="background-color: #c8d8e4;">
+                    <h6 >Posted On : <span id="time"><%= notice.createdAt %></span> </h6>
+                </div>
             </div>
-            <div class="card-body">
-                <p> <%= notice.content %> </p>
-            </div>
-            <div class="card-footer">
-                <h6 >Posted On : <span id="time"><%= notice.createdAt %></span> </h6>
-            </div>
+
         </div>
-   
-    
-  <%   }) %> 
+         
+       
+        
+      <%   }) %> 
+    </div>
+
+
 
   
 

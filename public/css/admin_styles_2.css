@@ -127,3 +127,18 @@ td, th {
   border-bottom: 1px solid #81818140;
 }
 
+
+.pagination button {
+  width:55px;
+  margin:0 15px;
+  background-color: rgb(236, 231, 208);
+}
+
+.pagination button:hover {
+  background-color: #e8acaa;
+}
+
+.pagination .activePage {
+  background-color: #e8acaa;
+}
+

@@ -1,0 +1,17 @@
+<%- include('../includes/header') -%>
+
+
+
+<div class="container">
+    <div class="card mt-5 " style="width:850px">
+        <div class="card-body" style="background-color: #ffa781;">
+            <h2 style="color: #5b0e2d;">Hello, <%= current_user.username %> <br> Thank you for enrolling for our course <%= application.course %> <br> 
+                We have successfully received your payment of Rs.50,000 <br>
+                We will inform you when the classes starts !!!
+            </h2>
+        </div>
+        <div class="card-header" style="background-color: #ffa781;">
+            <button class="btn" style="border: 3px solid black ; background-color: #0e387a;"><a class="text-white"  style="text-decoration: none;"  href="/users/getinvoice/<%= application.id %>">Download Invoice </a> </button>
+        </div>
+    </div>
+</div>

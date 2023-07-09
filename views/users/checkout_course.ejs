@@ -1,0 +1,178 @@
+<%- include('../includes/header') -%>
+
+<div class="container">
+
+   
+<div class="card p-5">
+    <!-- <h4>Student Name: <%= current_user.username %> </h4>
+    <h4>Date of Birth: <%= application.DOB %> </h4> -->
+<h3 class="text-center">The Oxford College of Science </h3>
+<p class="text-center">No.32, 17th B Main, Sector IV, HSR Layout
+    Bengaluru 560 102</p>
+   <table style="width: 800px; " class="application-table">
+    <tr>
+        <th> </th>
+        <th> </th>
+        <th> </th>
+    </tr>
+    <tr style="height: 50px;" >
+        <th >Student Name : </th>
+        <th> <%= current_user.username %> </th>
+        <th><img style="height:250px; width: 280px; position: absolute; left:850px; top: 180px; " src="/uploaded-images/<%= application.profile %>" alt="Student Profil"></th>
+
+    </tr>
+     <tr >
+        <th> Date of Birth : </th>
+        <th> <%= application.DOB  %> </th>
+    </tr>
+   
+    <tr>
+        <th> Age : </th>
+        <th> <%= application.age %> </th>
+    </tr>
+ 
+     <tr>
+        <th> Father Name : </th>
+        <th> <%= application.fatherName %> </th>
+     </tr>
+          
+     <tr>
+        <th> Mother Name : </th>
+        <th> <%= application.motherName %> </th>
+     </tr>
+     
+     <tr>
+        <th> Nationality </th>
+        <th> <%= application.nationality %> </th>
+     </tr>
+
+     <tr>
+        <th> Address : </th>
+        <th> <%= application.address %> </th>
+     </tr>
+
+     <tr>
+        <th> Course applied : </th>
+        <th> <%= application.course %> </th>
+     </tr>
+   
+    </table>
+    <hr style="border: 2px solid black;">
+     <div class="row mt-5">
+        <div class="col">
+            <table style="width:400px;" class="application-table">
+                
+           
+           <h3 class="mb-3 text-decoration-underline"> SSLC  information </h4>
+            <tr>
+                <th> Year of Passing :</th>
+                <th> <%= application.yearOfPassing10 %> </th>
+            </tr>
+            <tr>
+                <th> Board/University </th>
+                <th> <%= application.board10 %> </th>
+            </tr>
+            <tr>
+                <th> Stream </th>
+                <th> <%= application.stream10 %> </th>
+            </tr>
+            <tr>
+                <th> Percentage : </th>
+                <th><%= application.percentage10 %> </th>
+            </tr>
+        </table>
+
+    
+        </div>
+        <div class="col">
+            <table style="width:400px;" class="application-table">
+                <h3 class="mb-3 text-decoration-underline"> PUC information </h4>     
+            <tr>
+                <th> Year of Passing :</th>
+                <th> <%= application.yearOfPassing12 %> </th>
+            </tr>
+            <tr>
+                <th> Board/University </th>
+                <th> <%= application.board12 %> </th>
+            </tr>
+            <tr>
+                <th> Stream </th>
+                <th> <%= application.stream12 %> </th>
+            </tr>
+            <tr>
+                <th> Percentage : </th>
+                <th><%= application.percentage12 %> </th>
+            </tr>
+            </table>
+        </div>
+     </div>
+
+    <hr style="border: 2px solid black;">
+
+     <div class="row mt-5">
+        <div class="col">
+            <table style="width:800px; height: 1000px;" class="application-table">
+                <h3 class="mb-3text-decoration-underline">Documents Submitted </h4>
+                <tr >
+                    <th > Transfer Certificate : </th>
+                    <tr>
+                        <th > <embed src="/uploaded-images/<%= application.tc %>" alt="Transfer Certicate"> </th>
+
+                    </tr>
+                </tr>
+                <tr >
+                    <th> SSLC Marksheet </th>
+                    <tr>
+                        <th> <embed src="/uploaded-images/<%= application.marksheet10 %>" alt="SSLC Marksheet" > </th>
+
+                    </tr>
+                </tr>
+                <tr>
+                    <th> PUC Marksheet </th>
+                    <tr>
+                        <th>  <embed src="/uploaded-images/<%= application.marksheet12 %>" alt="PUC marksheet" >  </th>
+
+                    </tr>
+                </tr>
+
+    
+            </table>
+        </div>
+
+     
+        
+
+     </div>
+
+    
+
+    
+    </div>
+    <div class="mt-5">
+        <h3 class="mt-5 text-decoration-underline"  style="display: inline;">Form status :    </h2>
+        <h4 style="display: inline; margin-left: 140px;"> <%= application.formStatus %></h2>
+    </div>
+
+
+
+    <div>
+        <button class="btn btn-success mt-5" id="payButton" type="button" onclick="display()"> Pay Now</button>
+
+        <script src="https://js.stripe.com/v3/"></script>
+<script type="text/javascript">
+var stripe = Stripe(' <%= process.env.STRIPE_PUBLISHABLE_KEY %>');
+         function display(){
+            console.log(' <%= process.env.STRIPE_PUBLISHABLE_KEY %>')
+            stripe.redirectToCheckout({
+                sessionId : '<%= sessionId %>'
+            })
+        }
+     </script>
+        
+    </div>
+
+</div>
+
+
+
+<%- include('../includes/footer') -%> 

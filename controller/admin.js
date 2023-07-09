@@ -8,6 +8,11 @@ const bcrypt = require('bcryptjs')
 
 const { validationResult } = require('express-validator')
 
+// ---------------------------------constants-----------------------------------------------
+const PER_PAGE = 10
+
+
+
 
 // --------------------------homepage, login, register controls --------------------------
 
@@ -140,7 +145,7 @@ module.exports.adminLogout = (req, res) => {
             console.log(err)
         }
 
-    })
+    })  
   
 }
 
@@ -538,6 +543,12 @@ module.exports.postAddNotice = (req, res) => {
 // ------------------------------------------users---------------------------------------
 
 module.exports.allUsers = (req, res) =>{
+
+let page = Number(req.query.page) || 1 
+
+
+
+
 let message = req.flash('success')
 let updateSuccess = req.flash('updateSuccess')
 
@@ -552,9 +563,21 @@ if(message.length > 0){
     message = null
 }
 
- User.findAll()
- .then(users => {
-    res.render('admin/all-users.ejs', {users : users, message: message, updateSuccess: updateSuccess , current_admin : req.session.current_admin})
+ User.findAll({offset: (page - 1 ) * PER_PAGE ,limit: PER_PAGE})
+ .then(async users => {
+    numofUsers = await User.count()
+    numofButtons = Math.ceil(numofUsers / PER_PAGE )
+    res.render('admin/all-users.ejs', {users : users, message: message, 
+        numofButtons: numofButtons,
+        updateSuccess: updateSuccess , current_admin : req.session.current_admin,
+        numofUsers: numofUsers,
+        hasNext: page * PER_PAGE <  numofUsers,
+        hasPrev : page > 1,
+        nextPage : page + 1,
+        prevPage : page -1 ,
+        lastPage : Math.ceil(numofUsers / PER_PAGE),
+        currentPage : page            
+    })
  })  
  .catch(err => console.log(err))
 }

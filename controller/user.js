@@ -85,7 +85,8 @@ module.exports.getPayment = (req, res) => {
     Application.findAll({where:{
         [Op.and] : [
             {studentId : current_user.id},
-            {formStatus : 'Accepted'}
+            {formStatus : 'Accepted'},
+            {payment: false}
         ]
     }})
     .then(applications => {
@@ -146,7 +147,6 @@ module.exports.getPdf = (req, res) => {
     var fileName = 'application' + "_" + appId + ".pdf"
 
 
-    console.log(fullpath)
     var filePath = path.join(fullpath, 'public', 'pdf', fileName)
     const doc = new PDFDocument()
 

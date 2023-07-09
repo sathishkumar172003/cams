@@ -30,23 +30,31 @@
             <div class="col">
                
     
-                    <div class="card mt-5" style="width:500px; background-color: rgb(133, 190, 215);">
-                        <div class="card-header">
-                            <h3 class="card-title text-center"> Course:  <%= application.course %> </h3>
+                    <div class="card mt-5" style="width:500px; ">
+                        <div class="card-header" style="background-color: #5f2c3e; color:white;">
+                            <h3 class="card-title text-center" > Course:  <%= application.course %> </h3>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text"> Status:  <%= application.formStatus %> </p>
+                        <div class="card-body" style="background-color: #c2d2bd;font-size: 20px;">
+                            <p class="card-text" style="font-size: 20px;"> Status:  <%= application.formStatus %> </p>
                             <% if(application.payment == false){ %> 
                                 <p class="card-text"> You can pay the fee once your application  gets accepted  </p>
                             <% } else { %> 
-                                <p class="card-text"> Paid </p>
+                                <p class="card-text" > Payment :     Paid </p>
                             <% } %>  
         
                         </div>
-                        <div class="card-header">
-                            <button class="btn btn-danger" type="button"> <a href="/applications/<%= application.id %> ">Delete</a> </button>
-                            <button class="btn btn-info"type="button"> <a href="/applications/updateApplication/<%= application.id %> ">Update</a> </button>
-                            <button class="btn btn-success" type="button"> <a href="/applications/viewApplication/<%= application.id %> ">View Application</a> </button>
+                        <div class="card-header user-course-page" style="background-color: #c2d2bd;">
+
+                            <% if(application.payment == true){ %> 
+                                <button class="btn " type="button" style="background-color: #EEA47F;"> <a href="/applications/viewApplication/<%= application.id %> " class="text-black">View Application</a> </button>
+
+                          <%   } else { %> 
+                            <button class="btn " type="button" style="background-color: #EEA47F;"> <a href="/applications/viewApplication/<%= application.id %> " class="text-black">View Application</a> </button>
+                            <button class="btn "type="button" style="background-color: #00539C;"> <a href="/applications/updateApplication/<%= application.id %> ">Update</a> </button>
+
+
+                         <% } %> 
+
                         </div>
                     </div>
         

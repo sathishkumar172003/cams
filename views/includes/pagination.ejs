@@ -1,0 +1,26 @@
+
+<div class="pagination">
+
+    <%  if(currentPage != 1 && prevPage != 1 ){ %> 
+         <button><a href="/admin/allusers?page=1"> 1 </a></button>
+ 
+    <% } %>
+    <% if(hasPrev) { %> 
+     <button><a href="/admin/allusers?page=<%= prevPage %>"> <%= prevPage %> </a></button>
+ <% } %> 
+ <button  class="activePage"> <a href="/admin/allusers?page=<% currentPage %>" > <%= currentPage %> </a></button>
+ 
+ 
+    <% if(hasNext && lastPage != nextPage){ %> 
+     <button> <a href="/admin/allusers?page=<%= nextPage %>"> <%= nextPage %> </a></button>
+    <% } %> 
+ 
+    
+     
+     <% if(currentPage != lastPage){ %> 
+         <button><a href="/admin/allusers?page=<%= lastPage %>"> <%= lastPage %> </a></button>
+ 
+     <% } %> 
+ 
+  </div>
+

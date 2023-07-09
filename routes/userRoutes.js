@@ -10,6 +10,7 @@ const upload = require('../util/upload')
 
 const userController = require('../controller/user')
 const authController = require('../controller/auth')
+const checkoutController = require("../controller/checkout")
 
 const User = require('../model/user')
 
@@ -99,6 +100,21 @@ router.get('/notifications', isAuth,userController.getNotification)
 
 
 router.get('/getpdf/:appId', isAuth, userController.getPdf)
+
+// ------------------------------payment routes -----------------------------------
+
+router.get('/checkout/cancel', isAuth, checkoutController.getCancel)
+router.get('/checkout/success/:appId', isAuth, checkoutController.getSuccess)
+router.get('/checkout/:appId', isAuth, checkoutController.getPayment)
+
+
+router.get('/getinvoice/:appId', isAuth, checkoutController.getInvoice)
+
+
+
+
+
+
 
 module.exports = router
 
