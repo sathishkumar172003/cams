@@ -36,8 +36,7 @@ router.post('/postApplication', appUpload,
         throw new Error("Age cannot be less than 14 ")
     }
     return true
-    }),  
-    ] ,appController.postApplication)
+    }) ] ,appController.postApplication)
 
 
 router.get('/:appId',  appController.deleteApplication)

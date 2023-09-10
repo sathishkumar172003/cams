@@ -22,7 +22,7 @@
             <div class="card">
                 <div class="card-body">
                 <label class="form-label" >Course </label>
-                        <select name="course"id='course' class="form-select" >
+                        <select name="course"id='course' class="form-select" required>
                             <optgroup label="B.Sc">
                                 <option value="biotechnology">Bio technology</option>
                                 <option value="biochemistry">Bio Chemistry</option>
@@ -44,7 +44,7 @@
         <div class="card">
             <div class="card-body">
                 <label  class="form-label">Student Pic</label>
-                <input class="form-control" type="file" name="studentPic" >
+                <input class="form-control" type="file" name="studentPic" required>
             </div>
         </div>
         <!-- student pic  -->
@@ -52,7 +52,7 @@
         <div class="card">
             <div class="card-body">
                 <label class="form-label">Father's Name</label>
-                <input type="text" name="fatherName"  class="form-control">
+                <input type="text" name="fatherName"  class="form-control" required>
             </div>
         </div>
          <!-- father name -->
@@ -60,7 +60,7 @@
          <div class="card">
             <div class="card-body">
                 <label  class="form-label">Mother's Name</label>
-                <input type="text" name="motherName"  class="form-control">
+                <input type="text" name="motherName"  class="form-control" required>
             </div>
          </div>
         <!-- mother name -->
@@ -70,7 +70,7 @@
                 <div class="col">
                     <div class="card-body">
                         <label  class="form-label">Date of Birth</label>
-                        <input type="date" name="dob" class="form-control">
+                        <input type="date" name="dob" class="form-control" required>
                     </div>
                 </div>
                 <div class="col">
@@ -102,7 +102,7 @@
         <div class="card">
             <div class="card-body">
                 <label class="form-label">Enter your correspondance address</label>
-                <textarea name="correspondanceAddress"  cols="20" rows="05" class="form-control ">
+                <textarea name="correspondanceAddress"  cols="20" rows="05" class="form-control " required>
 
                 </textarea>
             </div>
@@ -111,7 +111,7 @@
         <div class="card">
             <div class="card-body">
                 <label  class="form-label">Permanent Address </label>
-                <textarea name="permanentAddress"  cols="30" rows="05" class="form-control">
+                <textarea name="permanentAddress"  cols="30" rows="05" class="form-control" required>
 
                 </textarea>
             </div>
@@ -124,7 +124,7 @@
         <div class="card">
             <div class="card-body">
                 <label class="form-label">Select Category</label>
-                <select name="category" id="category"  class="form-select">
+                <select name="category" id="category"  class="form-select" >
                     <option value="general">General</option>
                     <option value="obc">OBC</option>
                     <option value="sc/st">SC/ST</option>
@@ -153,23 +153,23 @@
                     <div class="row">
                         <div class="col">
                             <label class="form-label">Year of Passing: </label>
-                            <input type="number" name="sslcYearOfPassing" class="form-control">
+                            <input type="number" name="sslcYearOfPassing" class="form-control" required>
                         </div>
                         <div class="col">
 
                             <label  class="form-label"> Board/University</label>
-                            <input type="text" name="sslcBoard"  class="form-control">
+                            <input type="text" name="sslcBoard"  class="form-control" required>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <label  class="form-label"> Percentage </label>
-                            <input type="number" name="sslcPercentage" class="form-control">
+                            <input type="number" name="sslcPercentage" class="form-control" required>
 
                         </div>
                         <div class="col">
                             <label  class="form-label"> Stream </label>
-                            <input type="text" name="sslcStream"  class="form-control">
+                            <input type="text" name="sslcStream"  class="form-control" required>
 
                         </div>
                     </div>
@@ -188,22 +188,22 @@
                     <div class="row">
                         <div class="col">
                             <label  class="form-label"> Board/University</label>
-                            <input type="text" name="pucBoard"  class="form-control">
+                            <input type="text" name="pucBoard"  class="form-control" required>
                         </div>
                         <div class="col">
                             <label  class="form-label"> Year of Passing </label>
-                            <input type="number" name="pucYearOfPassing" class="form-control">
+                            <input type="number" name="pucYearOfPassing" class="form-control" required>
 
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
                             <label  class="form-label"> Percentage </label>
-                            <input type="number" name="pucPercentage"  class="form-control">
+                            <input type="number" name="pucPercentage"  class="form-control" required>
                         </div>
                         <div class="col">
                             <label  class="form-label">Stream</label>
-                            <input type="text" name="pucStream"  class="form-control">                        </div>
+                            <input type="text" name="pucStream"  class="form-control" required>                        </div>
                     </div>
 
                 </div>
@@ -226,14 +226,14 @@
 
                 <div class="card-body">
                     <label  class="form-label">Transfer certificate</label>
-                    <input type="file" name="tc" class="form-control">
+                    <input type="file" name="tc" class="form-control" required>
                 </div>
             <!-- transfer certificate  -->
 
             <!-- 10th marksheet  -->
                 <div class="card-body">
                     <label class="form-label">10<sup>th</sup> Marksheet </label>
-                    <input type="file" name="sslcMarksheet"  class="form-control">
+                    <input type="file" name="sslcMarksheet"  class="form-control" required>
                 </div>
 
             <!-- 10th marksheet  -->
@@ -242,7 +242,7 @@
 
                 <div class="card-body">
                     <label  class="form-label">12<sup>th</sup> Marksheet </label>
-                    <input type="file" name="pucMarksheet"  class="form-control">
+                    <input type="file" name="pucMarksheet"  class="form-control" required>
                 </div>
 
             <!-- 12th marksheet  -->
@@ -259,7 +259,7 @@
                 <div class="card-body mt-2">
                     <h4 class="mt-3 mb-4">I hereby declare that the facts mentioned above are true to the best of my knowledge and belief </h3>
 
-                    <input type="text" name="userSign" placeholder="Enter your name" class="form-control">
+                    <input type="text" name="userSign" placeholder="Enter your name" class="form-control" required>
 
 
                 </div>
